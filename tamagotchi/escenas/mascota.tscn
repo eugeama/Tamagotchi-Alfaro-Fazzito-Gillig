@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cxryrb0ft8dbw"]
+[gd_scene format=3 uid="uid://cxy3qwaq1q08v"]
 
 [ext_resource type="Script" uid="uid://bjo53kep3gv56" path="res://scripts/mascota.gd" id="1_xci1x"]
 
@@ -79,7 +79,7 @@ color = Color(0.13682577, 0.13682574, 0.13682571, 1)
 [node name="animacionOjos" type="AnimationPlayer" parent="ojos" unique_id=532369279]
 
 [node name="Timer" type="Timer" parent="." unique_id=1495420839]
-wait_time = 5.0
+wait_time = 3.0
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
