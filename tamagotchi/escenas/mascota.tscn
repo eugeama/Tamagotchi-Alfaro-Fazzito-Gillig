@@ -77,3 +77,9 @@ offset_bottom = 40.0
 color = Color(0.13682577, 0.13682574, 0.13682571, 1)
 
 [node name="animacionOjos" type="AnimationPlayer" parent="ojos" unique_id=532369279]
+
+[node name="Timer" type="Timer" parent="." unique_id=1495420839]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
