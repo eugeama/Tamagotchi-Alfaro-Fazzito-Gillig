@@ -27,11 +27,7 @@ func cambioHambre(delta: float) -> void:
 func cambioAburrimiento(delta: float) -> void:
 	aburrimiento+=delta
 	if aburrimiento>maxPosible:
-		aburrimiento
+		aburrimiento=maxPosible
 	if aburrimiento<minPosible:
-		aburrimiento
+		aburrimiento=minPosible
 	cambioEstado.emit()
-func _ready() -> void:
-	#para probar si funciona variable globaaal
-	await get_tree().create_timer(3.0).timeout
-	cambioEnergia(-20.0)
