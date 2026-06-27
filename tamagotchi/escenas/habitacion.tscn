@@ -1,8 +1,100 @@
 [gd_scene format=3 uid="uid://dhaekb36mpj5q"]
 
 [ext_resource type="PackedScene" uid="uid://cxryrb0ft8dbw" path="res://escenas/mascota.tscn" id="1_xpk0y"]
+[ext_resource type="Script" uid="uid://dylxupoq8mioj" path="res://scripts/interfaz_estados.gd" id="2_pb0dd"]
+[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/DePixelHalbfett.ttf" id="3_oeohs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oeohs"]
+bg_color = Color(0.6057512, 0.7286306, 0.87786895, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ul666"]
+bg_color = Color(0.39597696, 0.64310265, 0.85890734, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sn746"]
+bg_color = Color(0.5378049, 0.79123473, 0.70606923, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p0hbn"]
+bg_color = Color(0.31962708, 0.7038019, 0.47824866, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yaufk"]
+bg_color = Color(0.8671565, 0.70785487, 0.81297135, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bcmsc"]
+bg_color = Color(0.9414763, 0.66610634, 0.8252193, 1)
 
 [node name="habitacion" type="Node2D" unique_id=325549948]
 
 [node name="mascota" parent="." unique_id=1085864667 instance=ExtResource("1_xpk0y")]
-position = Vector2(528, 282.99997)
+position = Vector2(552, 297.00003)
+
+[node name="interfazEstados" type="CanvasLayer" parent="." unique_id=255994594]
+script = ExtResource("2_pb0dd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="interfazEstados" unique_id=801540865]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -245.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="hambre" type="HBoxContainer" parent="interfazEstados/VBoxContainer" unique_id=1294069647]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Label" type="Label" parent="interfazEstados/VBoxContainer/hambre" unique_id=454861323]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_oeohs")
+text = "hambre: "
+
+[node name="ProgressBar" type="ProgressBar" parent="interfazEstados/VBoxContainer/hambre" unique_id=1473626987]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_oeohs")
+theme_override_styles/background = SubResource("StyleBoxFlat_oeohs")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ul666")
+value = 100.0
+show_percentage = false
+
+[node name="energia" type="HBoxContainer" parent="interfazEstados/VBoxContainer" unique_id=1729593080]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Label" type="Label" parent="interfazEstados/VBoxContainer/energia" unique_id=231997097]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_oeohs")
+text = "energia: "
+
+[node name="ProgressBar" type="ProgressBar" parent="interfazEstados/VBoxContainer/energia" unique_id=636530665]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_sn746")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p0hbn")
+value = 100.0
+show_percentage = false
+
+[node name="aburrimiento" type="HBoxContainer" parent="interfazEstados/VBoxContainer" unique_id=1719516196]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="interfazEstados/VBoxContainer/aburrimiento" unique_id=1935913604]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_oeohs")
+text = "aburrimiento:"
+
+[node name="ProgressBar" type="ProgressBar" parent="interfazEstados/VBoxContainer/aburrimiento" unique_id=1939090100]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_yaufk")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bcmsc")
+value = 100.0
+show_percentage = false

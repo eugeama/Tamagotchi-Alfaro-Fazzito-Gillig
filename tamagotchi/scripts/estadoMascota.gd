@@ -32,4 +32,6 @@ func cambioAburrimiento(delta: float) -> void:
 		aburrimiento
 	cambioEstado.emit()
 func _ready() -> void:
-	pass 
+	#para probar si funciona variable globaaal
+	await get_tree().create_timer(3.0).timeout
+	cambioEnergia(-20.0)
