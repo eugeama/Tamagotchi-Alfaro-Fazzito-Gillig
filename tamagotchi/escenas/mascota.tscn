@@ -1,6 +1,42 @@
 [gd_scene format=3 uid="uid://cxy3qwaq1q08v"]
 
 [ext_resource type="Script" uid="uid://bjo53kep3gv56" path="res://scripts/mascota.gd" id="1_xci1x"]
+[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="2_vgy2f"]
+[ext_resource type="Script" uid="uid://dylxupoq8mioj" path="res://scripts/interfaz_estados.gd" id="3_lltle"]
+
+[sub_resource type="Animation" id="Animation_lltle"]
+resource_name = "Dormir"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": ["      
+    
+Z    ", "      
+   Z 
+Z    ", "      Z
+   Z 
+Z    "]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ojos:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.099999994)]
+}
 
 [sub_resource type="Animation" id="Animation_d8lrb"]
 length = 0.001
@@ -39,6 +75,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 0.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:text")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
 }
 
 [sub_resource type="Animation" id="Animation_vgy2f"]
@@ -84,13 +132,68 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.15, 0.85), Vector2(1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ojos:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Boca:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vgy2f"]
 _data = {
+&"Dormir": SubResource("Animation_lltle"),
 &"RESET": SubResource("Animation_d8lrb"),
 &"comer": SubResource("Animation_vgy2f"),
 &"idle": SubResource("Animation_xci1x")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bseam"]
+bg_color = Color(0.6057512, 0.7286306, 0.87786895, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8endc"]
+bg_color = Color(0.39597696, 0.64310265, 0.85890734, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8c8hj"]
+bg_color = Color(0.5378049, 0.79123473, 0.70606923, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5tmyl"]
+bg_color = Color(0.31962708, 0.7038019, 0.47824866, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ry8ye"]
+bg_color = Color(0.9184593, 0.8191213, 0.8823943, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fs8dw"]
+bg_color = Color(0.9414763, 0.66610634, 0.8252193, 1)
 
 [node name="mascota" type="Node2D" unique_id=1085864667]
 script = ExtResource("1_xci1x")
@@ -207,6 +310,18 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="Label" type="Label" parent="textura" unique_id=215405688]
+texture_filter = 1
+layout_mode = 0
+offset_left = 23.0
+offset_top = -53.0
+offset_right = 71.0
+offset_bottom = 4.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+theme_override_constants/paragraph_spacing = -6
+theme_override_fonts/font = ExtResource("2_vgy2f")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=301025100]
 root_node = NodePath("../textura")
 libraries/ = SubResource("AnimationLibrary_vgy2f")
@@ -215,4 +330,117 @@ libraries/ = SubResource("AnimationLibrary_vgy2f")
 wait_time = 3.0
 autostart = true
 
+[node name="Control" type="Control" parent="." unique_id=380147004]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.2, 0.2)
+script = ExtResource("3_lltle")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=861224784]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -182.0
+offset_top = -306.0
+offset_right = 160.0
+offset_bottom = -191.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="hambre" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=34596806]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/hambre" unique_id=1895842171]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "hambre: "
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/VBoxContainer/hambre" unique_id=484512232]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_bseam")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8endc")
+
+[node name="energia" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=2145161992]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/energia" unique_id=762381245]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "energia: "
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/VBoxContainer/energia" unique_id=1527740668]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_8c8hj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5tmyl")
+value = 100.0
+
+[node name="aburrimiento" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=502191865]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/aburrimiento" unique_id=544991245]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "aburrimiento:"
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/VBoxContainer/aburrimiento" unique_id=111395295]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_ry8ye")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fs8dw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=147019194]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.68700004
+anchor_right = 0.5
+anchor_bottom = 0.68700004
+offset_left = -183.0
+offset_top = -165.48
+offset_right = 160.0
+offset_bottom = -114.48005
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="jugar" type="Button" parent="Control/HBoxContainer" unique_id=36432558]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "jugar
+"
+
+[node name="comer" type="Button" parent="Control/HBoxContainer" unique_id=986498177]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "comer"
+
+[node name="dormir" type="Button" parent="Control/HBoxContainer" unique_id=293070165]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "dormir"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

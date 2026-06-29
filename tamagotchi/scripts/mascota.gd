@@ -38,6 +38,7 @@ func dormir() -> void:
 	EstadoMascota.cambioEnergia(+50)
 	EstadoMascota.cambioHambre(+10)
 	EstadoMascota.cambioAburrimiento(+20)
+	animacion.play("Dormir")
 func comer() -> void:
 	EstadoMascota.cambioHambre(-30)
 	animacion.play("comer")
@@ -45,3 +46,8 @@ func jugar() -> void:
 	#aca va el juegou
 	EstadoMascota.cambioAburrimiento(-20)
 	EstadoMascota.cambioEnergia(-10)
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name!="idle":
+		animacion.play("idle")
