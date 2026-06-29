@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cxy3qwaq1q08v" path="res://escenas/mascota.tscn" id="1_xpk0y"]
 [ext_resource type="Script" uid="uid://dylxupoq8mioj" path="res://scripts/interfaz_estados.gd" id="2_pb0dd"]
-[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/DePixelHalbfett.ttf" id="3_oeohs"]
+[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="3_oeohs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oeohs"]
 bg_color = Color(0.6057512, 0.7286306, 0.87786895, 1)
