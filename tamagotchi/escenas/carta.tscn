@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://dyr0ruck4of0x"]
+
+[ext_resource type="Script" uid="uid://dryudacti5omx" path="res://scripts/carta.gd" id="1_yo80u"]
+[ext_resource type="Texture2D" uid="uid://cqho0kuhhkmfl" path="res://icon.svg" id="2_sllcx"]
+[ext_resource type="Texture2D" uid="uid://rp70ifhcd00c" path="res://5b945fb755a6002ff7fbe0b62eb6001e.jpg" id="3_sllcx"]
+
+[sub_resource type="Animation" id="Animation_sllcx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:script")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_yo80u")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("atras:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_up28s"]
+resource_name = "dar_vuelta"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:script")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("atras:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nclgp"]
+_data = {
+&"RESET": SubResource("Animation_sllcx"),
+&"dar_vuelta": SubResource("Animation_up28s")
+}
+
+[node name="Carta" type="Node2D" unique_id=835572809]
+script = ExtResource("1_yo80u")
+
+[node name="frente" type="Sprite2D" parent="." unique_id=1454488521]
+position = Vector2(0.5, -0.1250019)
+scale = Vector2(0.17255436, 0.16808648)
+texture = ExtResource("3_sllcx")
+
+[node name="atras" type="Sprite2D" parent="." unique_id=1271778042]
+texture = ExtResource("2_sllcx")
+
+[node name="TouchScreenButton" type="Button" parent="." unique_id=1719225350]
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+flat = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1434928929]
+libraries/ = SubResource("AnimationLibrary_nclgp")
+
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]
