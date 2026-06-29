@@ -11,3 +11,4 @@ offset_right = 1155.0
 offset_bottom = 651.0
 
 [node name="Carta" parent="." unique_id=835572809 instance=ExtResource("2_8geac")]
+position = Vector2(492, 193)

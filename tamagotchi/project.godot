@@ -10,19 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Tamagotchi"
+config/name="tamagotchi"
+run/main_scene="uid://dyr0ruck4of0x"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
-
-[autoload]
-
-EstadoMascota="*uid://cvol06qd2wsx1"
-
-[importer_defaults]
-
-animation_library={
-&"import_script/path": "uid://cvol06qd2wsx1"
-}
 
 [physics]
 
