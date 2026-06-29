@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 @onready var mascota:Node2D = get_node("/root/habitacion/mascota")
 @onready var barraHambre:ProgressBar=$VBoxContainer/hambre/ProgressBar
