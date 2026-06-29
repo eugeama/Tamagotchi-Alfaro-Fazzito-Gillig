@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://eewy0bxvgf4f"]
+
+[ext_resource type="Script" uid="uid://d4hnit8v6rs6d" path="res://escenas/fondo.gd" id="1_0ghod"]
+[ext_resource type="PackedScene" uid="uid://dyr0ruck4of0x" path="res://escenas/carta.tscn" id="2_8geac"]
+
+[node name="fondo" type="Node2D" unique_id=512022355]
+script = ExtResource("1_0ghod")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1171519226]
+offset_right = 1155.0
+offset_bottom = 651.0
+
+[node name="Carta" parent="." unique_id=835572809 instance=ExtResource("2_8geac")]
+position = Vector2(492, 193)
