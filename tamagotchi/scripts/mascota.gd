@@ -2,17 +2,17 @@ extends Node2D
 @onready var animacion: AnimationPlayer = $AnimationPlayer
 @onready var timer: Timer = $Timer
 
-const perdidaEnergia=5.0
-const sumaHambre=10.0
-const sumaAburrimiento=10.0
+const perdidaEnergiaPeriodica=5.0
+const sumaHambrePeriodica=10.0
+const sumaAburrimientoPeriodica=10.0
 func _ready() -> void:
 	animacion.play("idle")
 	EstadoMascota.cambioEstado.connect(actualizarAnimacion)
 
 func _on_timer_timeout() -> void:
-	EstadoMascota.cambioEnergia(-perdidaEnergia)
-	EstadoMascota.cambioHambre(+sumaHambre)
-	EstadoMascota.cambioAburrimiento(+sumaAburrimiento)
+	EstadoMascota.cambioEnergia(-perdidaEnergiaPeriodica)
+	EstadoMascota.cambioHambre(+sumaHambrePeriodica)
+	EstadoMascota.cambioAburrimiento(+sumaAburrimientoPeriodica)
 func actualizarAnimacion() -> void:
 	#pass
 	"""
@@ -35,12 +35,13 @@ func cambiarAnimacion(nombre:String)-> void:
 		animacion.play(nombre)
 	
 func dormir() -> void:
-	EstadoMascota.cambioEnergia(+10)
-	EstadoMascota.cambioHambre(+20)
-func comer() -> void:
-	EstadoMascota.cambioHambre(-5)
+	EstadoMascota.cambioEnergia(+50)
+	EstadoMascota.cambioHambre(+10)
 	EstadoMascota.cambioAburrimiento(+20)
+func comer() -> void:
+	EstadoMascota.cambioHambre(-30)
+	animacion.play("comer")
 func jugar() -> void:
 	#aca va el juegou
-	EstadoMascota.cambioAburrimiento(-5)
-	EstadoMascota.cambioEnergia(-20)
+	EstadoMascota.cambioAburrimiento(-20)
+	EstadoMascota.cambioEnergia(-10)

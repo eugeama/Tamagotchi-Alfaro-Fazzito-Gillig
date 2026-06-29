@@ -16,10 +16,61 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boca:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ojos:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_vgy2f"]
+resource_name = "comer"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boca:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1), Vector2(1e-05, 1e-05), Vector2(1, 1), Vector2(1e-05, 1e-05), Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ojos:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.5), Vector2(1, 0.1), Vector2(1, 0.5), Vector2(1, 0.1), Vector2(1, 0.5), Vector2(1, 0.1), Vector2(1, 0.5)]
+}
 
 [sub_resource type="Animation" id="Animation_xci1x"]
 resource_name = "idle"
-length = 0.9
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -28,7 +79,7 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.2),
+"times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.15, 0.85), Vector2(1, 1)]
@@ -37,46 +88,128 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vgy2f"]
 _data = {
 &"RESET": SubResource("Animation_d8lrb"),
+&"comer": SubResource("Animation_vgy2f"),
 &"idle": SubResource("Animation_xci1x")
 }
 
 [node name="mascota" type="Node2D" unique_id=1085864667]
-scale = Vector2(1.15, 0.85)
 script = ExtResource("1_xci1x")
 
-[node name="textura" type="Sprite2D" parent="." unique_id=2137662808]
+[node name="textura" type="Control" parent="." unique_id=770441881]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="textura" unique_id=1772696791]
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -14.0
+offset_right = 19.630432
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ojos" type="Node2D" parent="textura" unique_id=1992357884]
+scale = Vector2(1, 0.5)
+
+[node name="derecho" type="Control" parent="textura/ojos" unique_id=661047496]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -9.999997
+offset_top = -8.0
+offset_right = -9.999997
+offset_bottom = -8.0
+scale = Vector2(0.16, 0.16)
+
+[node name="ColorRect" type="ColorRect" parent="textura/ojos/derecho" unique_id=529009029]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13682577, 0.13682574, 0.13682571, 1)
+
+[node name="izquierdo" type="Control" parent="textura/ojos" unique_id=1898019732]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -8.0
+offset_right = 10.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.16, 0.16)
+
+[node name="ColorRect" type="ColorRect" parent="textura/ojos/izquierdo" unique_id=362661396]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13682577, 0.13682574, 0.13682571, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Boca" type="Control" parent="textura" unique_id=1467447163]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+
+[node name="ColorRect2" type="ColorRect" parent="textura/Boca" unique_id=1646264467]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -5.0
+offset_right = 10.73913
+offset_bottom = 4.411762
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=301025100]
 root_node = NodePath("../textura")
 libraries/ = SubResource("AnimationLibrary_vgy2f")
-
-[node name="ojos" type="Node2D" parent="." unique_id=1992357884]
-
-[node name="derecho" type="Sprite2D" parent="ojos" unique_id=150682961]
-position = Vector2(10, 20)
-scale = Vector2(0.16, 0.16)
-
-[node name="ColorRect" type="ColorRect" parent="ojos/derecho" unique_id=529009029]
-custom_minimum_size = Vector2(16, 16)
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.13682577, 0.13682574, 0.13682571, 1)
-
-[node name="izquierdo" type="Sprite2D" parent="ojos" unique_id=366711428]
-position = Vector2(25, 20)
-scale = Vector2(0.16, 0.16)
-
-[node name="ColorRect" type="ColorRect" parent="ojos/izquierdo" unique_id=362661396]
-custom_minimum_size = Vector2(16, 16)
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.13682577, 0.13682574, 0.13682571, 1)
-
-[node name="animacionOjos" type="AnimationPlayer" parent="ojos" unique_id=532369279]
 
 [node name="Timer" type="Timer" parent="." unique_id=1495420839]
 wait_time = 3.0

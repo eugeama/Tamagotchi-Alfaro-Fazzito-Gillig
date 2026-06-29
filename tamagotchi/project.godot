@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Tamagotchi"
-run/main_scene="uid://dyr0ruck4of0x"
+run/main_scene="uid://dhaekb36mpj5q"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
