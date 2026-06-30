@@ -1,20 +1,31 @@
 [gd_scene format=3 uid="uid://dhaekb36mpj5q"]
 
-[ext_resource type="Texture2D" uid="uid://c7gsswjk8arx1" path="res://assets/Sprites/Fondo.png" id="1_oeohs"]
+[ext_resource type="Texture2D" uid="uid://c7gsswjk8arx1" path="res://assets/Sprites/Fondos/Fondo.png" id="1_oeohs"]
 [ext_resource type="PackedScene" uid="uid://cxy3qwaq1q08v" path="res://escenas/mascota.tscn" id="1_xpk0y"]
+[ext_resource type="Texture2D" uid="uid://x6djd0gr3oe3" path="res://assets/Sprites/piso.png" id="2_ul666"]
 [ext_resource type="PackedScene" uid="uid://cbgaqis32v5w" path="res://escenas/BotonStart.tscn" id="4_ul666"]
+[ext_resource type="Texture2D" uid="uid://vq23lkpgewiy" path="res://assets/Sprites/BotonPintura/botonPinturaNormal.png" id="5_yaufk"]
+[ext_resource type="Texture2D" uid="uid://lukc8sqfecih" path="res://assets/Sprites/BotonPintura/botonPinturaPressed.png" id="6_bcmsc"]
+[ext_resource type="Texture2D" uid="uid://l4vdq2p0hpxs" path="res://assets/Sprites/BotonPintura/botonPinturaHover.png" id="7_6i1o1"]
+[ext_resource type="Script" uid="uid://3lpainwgoeer" path="res://scripts/habitacion.gd" id="8_bcmsc"]
 
 [node name="habitacion" type="Node2D" unique_id=325549948]
-process_mode = 2
+script = ExtResource("8_bcmsc")
 
 [node name="Fondo" type="Sprite2D" parent="." unique_id=548638428]
 texture_filter = 1
-position = Vector2(575.99994, 324.00003)
-scale = Vector2(11.5199995, 12.960001)
+position = Vector2(575.99994, 288.00003)
+scale = Vector2(11.52, 11.52)
 texture = ExtResource("1_oeohs")
 
+[node name="Piso" type="Sprite2D" parent="." unique_id=584060296]
+texture_filter = 1
+position = Vector2(577, 612.00006)
+scale = Vector2(11.5, 14.375)
+texture = ExtResource("2_ul666")
+
 [node name="mascota" parent="." unique_id=1085864667 instance=ExtResource("1_xpk0y")]
-position = Vector2(542, 580)
+position = Vector2(243, 545)
 scale = Vector2(4, 4)
 
 [node name="MenuPrincipal" type="CanvasLayer" parent="." unique_id=1486056118]
@@ -26,8 +37,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 0.0
-offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(3, 3)
 
 [node name="Label" type="Label" parent="MenuPrincipal" unique_id=1562833357]
@@ -35,3 +46,16 @@ offset_left = 216.0
 offset_top = 14.0
 offset_right = 833.0
 offset_bottom = 185.0
+
+[node name="botonPintura" type="TextureButton" parent="." unique_id=1480878328]
+texture_filter = 1
+offset_left = 1061.0
+offset_top = 17.0
+offset_right = 1086.0
+offset_bottom = 42.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("5_yaufk")
+texture_pressed = ExtResource("6_bcmsc")
+texture_hover = ExtResource("7_6i1o1")
+
+[connection signal="pressed" from="botonPintura" to="." method="_on_boton_pintura_pressed"]
