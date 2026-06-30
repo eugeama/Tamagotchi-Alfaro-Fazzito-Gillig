@@ -1,12 +1,13 @@
-extends Control
+extends CanvasLayer
 
 
-func _on_texture_button_pressed() -> void:
-	esconderMenu()
-	
 func esconderMenu():
 	$AnimationPlayer.play("desaparecer")
-	
+
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name=="desaparecer":
-		get_parent().visible=false
+		visible=false
+
+
+func _on_boton_start_pressed() -> void:
+	esconderMenu()

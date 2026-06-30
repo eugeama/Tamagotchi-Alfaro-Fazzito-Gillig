@@ -1,4 +1,6 @@
 extends Node2D
+@export var idMascota=""
+
 @onready var animacion: AnimationPlayer = $AnimationPlayer
 @onready var timer: Timer = $Timer
 @onready var camara: Camera2D = $Camera2D
@@ -24,10 +26,16 @@ var tweenMovimiento:Tween
 var centroCamaraInicial=Vector2.ZERO
 var offsetCamaraMascota=Vector2.ZERO
 var random=RandomNumberGenerator.new()
+var idEstado=""
+
+func _enter_tree() -> void:
+	idEstado=obtenerIdEstado()
+	EstadoMascota.obtenerEstado(idEstado)
 
 func _ready() -> void:
 	animacion.play("idle")
-	EstadoMascota.cambioEstado.connect(actualizarAnimacion)
+	if not EstadoMascota.cambioEstado.is_connected(actualizarAnimacion):
+		EstadoMascota.cambioEstado.connect(actualizarAnimacion)
 	random.randomize()
 	offsetCamaraMascota=camara.position
 	atributos.visible=false
@@ -37,9 +45,14 @@ func _ready() -> void:
 	iniciarMovimientoIdle()
 
 func _on_timer_timeout() -> void:
-	EstadoMascota.cambioEnergia(-perdidaEnergiaPeriodica)
-	EstadoMascota.cambioHambre(+sumaHambrePeriodica)
-	EstadoMascota.cambioAburrimiento(+sumaAburrimientoPeriodica)
+	EstadoMascota.cambioEnergia(idEstado,-perdidaEnergiaPeriodica)
+	EstadoMascota.cambioHambre(idEstado,+sumaHambrePeriodica)
+	EstadoMascota.cambioAburrimiento(idEstado,+sumaAburrimientoPeriodica)
+
+func obtenerIdEstado() -> String:
+	if idMascota!="":
+		return idMascota
+	return name
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and mostrandoAtributos:
@@ -176,13 +189,15 @@ func ignorarMouseEnVisuales(nodo: Node) -> void:
 	for hijo in nodo.get_children():
 		ignorarMouseEnVisuales(hijo)
 
-func actualizarAnimacion() -> void:
+func actualizarAnimacion(idMascotaCambiada: String="") -> void:
+	if idMascotaCambiada!="" and idMascotaCambiada!=idEstado:
+		return
 	#pass
 	"""
 	para cuando gtengamos los sprites chicoooos
-	var hambre=EstadoMascota.hambre
-	var energia=EstadoMascota.energia
-	var aburrimiento=EstadoMascota.aburrimiento
+	var hambre=EstadoMascota.hambre(idEstado)
+	var energia=EstadoMascota.energia(idEstado)
+	var aburrimiento=EstadoMascota.aburrimiento(idEstado)
 	
 	if hambre>50:
 		cambiarAnimacion("hambriento")
@@ -198,17 +213,17 @@ func cambiarAnimacion(nombre:String)-> void:
 		animacion.play(nombre)
 	
 func dormir() -> void:
-	EstadoMascota.cambioEnergia(+50)
-	EstadoMascota.cambioHambre(+10)
-	EstadoMascota.cambioAburrimiento(+20)
+	EstadoMascota.cambioEnergia(idEstado,+50)
+	EstadoMascota.cambioHambre(idEstado,+10)
+	EstadoMascota.cambioAburrimiento(idEstado,+20)
 	animacion.play("Dormir")
 func comer() -> void:
-	EstadoMascota.cambioHambre(-30)
+	EstadoMascota.cambioHambre(idEstado,-30)
 	animacion.play("comer")
 func jugar() -> void:
 	#aca va el juegou
-	EstadoMascota.cambioAburrimiento(-20)
-	EstadoMascota.cambioEnergia(-10)
+	EstadoMascota.cambioAburrimiento(idEstado,-20)
+	EstadoMascota.cambioEnergia(idEstado,-10)
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

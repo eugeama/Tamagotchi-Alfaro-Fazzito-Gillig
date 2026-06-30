@@ -4,10 +4,98 @@
 [ext_resource type="PackedScene" uid="uid://cxy3qwaq1q08v" path="res://escenas/mascota.tscn" id="1_xpk0y"]
 [ext_resource type="Texture2D" uid="uid://x6djd0gr3oe3" path="res://assets/Sprites/piso.png" id="2_ul666"]
 [ext_resource type="PackedScene" uid="uid://cbgaqis32v5w" path="res://escenas/BotonStart.tscn" id="4_ul666"]
+[ext_resource type="Script" uid="uid://ckwkaq1rk3gjg" path="res://scripts/menu_principal.gd" id="5_mhhel"]
 [ext_resource type="Texture2D" uid="uid://vq23lkpgewiy" path="res://assets/Sprites/BotonPintura/botonPinturaNormal.png" id="5_yaufk"]
+[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="6_6i1o1"]
 [ext_resource type="Texture2D" uid="uid://lukc8sqfecih" path="res://assets/Sprites/BotonPintura/botonPinturaPressed.png" id="6_bcmsc"]
+[ext_resource type="PackedScene" uid="uid://kkt8j8co8c5x" path="res://escenas/BotonConfig.tscn" id="7_0x0rw"]
 [ext_resource type="Texture2D" uid="uid://l4vdq2p0hpxs" path="res://assets/Sprites/BotonPintura/botonPinturaHover.png" id="7_6i1o1"]
 [ext_resource type="Script" uid="uid://3lpainwgoeer" path="res://scripts/habitacion.gd" id="8_bcmsc"]
+
+[sub_resource type="Animation" id="Animation_qqkjh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BotonStart:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BotonCofig:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fvbfk"]
+resource_name = "desaparecer"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BotonStart:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BotonCofig:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_megy7"]
+_data = {
+&"RESET": SubResource("Animation_qqkjh"),
+&"desaparecer": SubResource("Animation_fvbfk")
+}
 
 [node name="habitacion" type="Node2D" unique_id=325549948]
 script = ExtResource("8_bcmsc")
@@ -29,23 +117,43 @@ position = Vector2(243, 545)
 scale = Vector2(4, 4)
 
 [node name="MenuPrincipal" type="CanvasLayer" parent="." unique_id=1486056118]
+script = ExtResource("5_mhhel")
 
-[node name="Control" parent="MenuPrincipal" unique_id=1434329137 instance=ExtResource("4_ul666")]
+[node name="BotonStart" parent="MenuPrincipal" unique_id=1434329137 instance=ExtResource("4_ul666")]
 process_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -119.99997
+offset_top = -36.5
+offset_right = -39.0
+offset_bottom = -11.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 3)
 
 [node name="Label" type="Label" parent="MenuPrincipal" unique_id=1562833357]
-offset_left = 216.0
 offset_top = 14.0
-offset_right = 833.0
+offset_right = 1152.0
 offset_bottom = 185.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_6i1o1")
+theme_override_font_sizes/font_size = 90
+text = "TAMAGOTCHI"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonCofig" parent="MenuPrincipal" unique_id=132373876 instance=ExtResource("7_0x0rw")]
+offset_left = 457.00003
+offset_top = 405.00003
+offset_right = -614.0
+offset_bottom = -217.99997
+scale = Vector2(3, 3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuPrincipal" unique_id=1544506285]
+libraries/ = SubResource("AnimationLibrary_megy7")
 
 [node name="botonPintura" type="TextureButton" parent="." unique_id=1480878328]
 texture_filter = 1
@@ -58,4 +166,10 @@ texture_normal = ExtResource("5_yaufk")
 texture_pressed = ExtResource("6_bcmsc")
 texture_hover = ExtResource("7_6i1o1")
 
+[node name="mascota2" parent="." unique_id=823898926 instance=ExtResource("1_xpk0y")]
+position = Vector2(881, 545)
+scale = Vector2(4, 4)
+
+[connection signal="pressed" from="MenuPrincipal/BotonStart" to="MenuPrincipal" method="_on_boton_start_pressed"]
+[connection signal="animation_finished" from="MenuPrincipal/AnimationPlayer" to="MenuPrincipal" method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="botonPintura" to="." method="_on_boton_pintura_pressed"]
