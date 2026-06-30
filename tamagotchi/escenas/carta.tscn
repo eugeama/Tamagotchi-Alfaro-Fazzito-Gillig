@@ -89,12 +89,12 @@ _data = {
 }
 
 [node name="Carta" type="Node2D" unique_id=835572809]
+position = Vector2(158, 138)
 script = ExtResource("1_yo80u")
 
 [node name="frente" type="Sprite2D" parent="." unique_id=1454488521]
 position = Vector2(0.5, -0.1250019)
 scale = Vector2(0.17255436, 0.16808648)
-texture = ExtResource("3_sllcx")
 
 [node name="atras" type="Sprite2D" parent="." unique_id=1271778042]
 texture = ExtResource("2_sllcx")
