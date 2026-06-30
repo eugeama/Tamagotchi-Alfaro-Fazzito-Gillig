@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dryudacti5omx" path="res://scripts/carta.gd" id="1_yo80u"]
 [ext_resource type="Texture2D" uid="uid://cqho0kuhhkmfl" path="res://icon.svg" id="2_sllcx"]
-[ext_resource type="Texture2D" uid="uid://rp70ifhcd00c" path="res://5b945fb755a6002ff7fbe0b62eb6001e.jpg" id="3_sllcx"]
 
 [sub_resource type="Animation" id="Animation_sllcx"]
 length = 0.001
@@ -89,12 +88,12 @@ _data = {
 }
 
 [node name="Carta" type="Node2D" unique_id=835572809]
+position = Vector2(158, 138)
 script = ExtResource("1_yo80u")
 
 [node name="frente" type="Sprite2D" parent="." unique_id=1454488521]
 position = Vector2(0.5, -0.1250019)
 scale = Vector2(0.17255436, 0.16808648)
-texture = ExtResource("3_sllcx")
 
 [node name="atras" type="Sprite2D" parent="." unique_id=1271778042]
 texture = ExtResource("2_sllcx")
