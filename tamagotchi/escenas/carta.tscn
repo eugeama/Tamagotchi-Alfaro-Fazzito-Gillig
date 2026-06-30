@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dryudacti5omx" path="res://scripts/carta.gd" id="1_yo80u"]
 [ext_resource type="Texture2D" uid="uid://cqho0kuhhkmfl" path="res://icon.svg" id="2_sllcx"]
+[ext_resource type="Texture2D" uid="uid://rp70ifhcd00c" path="res://assets/Sprites/5b945fb755a6002ff7fbe0b62eb6001e.jpg" id="3_sllcx"]
 
 [sub_resource type="Animation" id="Animation_sllcx"]
 length = 0.001
