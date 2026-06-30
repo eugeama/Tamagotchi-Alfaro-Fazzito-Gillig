@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var fondo:Sprite2D=$Fondo
-@onready var botonPintura:TextureButton=$TextureButton
+@onready var botonPintura:TextureButton=$botonPintura
 
 const carpetaFondos="res://assets/Sprites/Fondos"
 
@@ -11,6 +11,8 @@ var indiceFondo=0
 func _ready() -> void:
 	cargarFondos()
 	acomodarIndiceFondoActual()
+	if not botonPintura.pressed.is_connected(_on_boton_pintura_pressed):
+		botonPintura.pressed.connect(_on_boton_pintura_pressed)
 
 func cargarFondos() -> void:
 	var archivos=DirAccess.get_files_at(carpetaFondos)

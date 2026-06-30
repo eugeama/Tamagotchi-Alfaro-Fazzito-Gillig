@@ -1,3 +1,69 @@
 [gd_scene format=3 uid="uid://b2p2crtiv1egy"]
 
+[ext_resource type="Texture2D" uid="uid://dxnq5ekgsxj6l" path="res://assets/Sprites/Minijuegos/minijuego2/PiedraPapelTijera.png" id="1_gn3i5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svomv"]
+atlas = ExtResource("1_gn3i5")
+region = Rect2(0, 0, 26, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpicc"]
+atlas = ExtResource("1_gn3i5")
+region = Rect2(26, 0, 26, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyu6h"]
+atlas = ExtResource("1_gn3i5")
+region = Rect2(52, 0, 26, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpq8e"]
+atlas = ExtResource("1_gn3i5")
+region = Rect2(78, 0, 26, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqwu2"]
+atlas = ExtResource("1_gn3i5")
+region = Rect2(104, 0, 26, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2nfg"]
+atlas = ExtResource("1_gn3i5")
+region = Rect2(130, 0, 26, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gogph"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svomv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpicc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyu6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpq8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqwu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2nfg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Node2D" type="Node2D" unique_id=1065393273]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=803600504]
+offset_left = -41.0
+offset_top = -26.0
+offset_right = 1189.0
+offset_bottom = 655.0
+color = Color(0.48869443, 0.30750492, 0.49372745, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=293256448]
+texture_filter = 1
+position = Vector2(194.00002, 321)
+scale = Vector2(15, 15)
+sprite_frames = SubResource("SpriteFrames_gogph")
+frame_progress = 0.4228389

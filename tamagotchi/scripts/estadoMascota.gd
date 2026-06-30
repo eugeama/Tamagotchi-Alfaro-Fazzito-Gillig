@@ -1,9 +1,7 @@
 extends Node
-signal cambioEstado
+signal cambioEstado(idMascota)
 
-var energia=100
-var hambre=0
-var aburrimiento=0
+var estados={}
 
 const maxPosible=100
 const minPosible=0
@@ -20,31 +18,44 @@ func _notification(noti: int) -> void:
 	if noti==NOTIFICATION_WM_CLOSE_REQUEST or noti==NOTIFICATION_EXIT_TREE:
 		guardarEstado()
 
-func cambioEnergia(delta: float) -> void:
-	energia+=delta
-	if energia>maxPosible:
-		energia=maxPosible
-	if energia<minPosible:
-		energia=minPosible
-	cambioEstado.emit()
+func crearEstadoBase() -> Dictionary:
+	return {
+		"energia":100,
+		"hambre":0,
+		"aburrimiento":0
+	}
+
+func obtenerEstado(idMascota: String) -> Dictionary:
+	if not estados.has(idMascota):
+		estados[idMascota]=crearEstadoBase()
+		guardarEstado()
+	return estados[idMascota]
+
+func energia(idMascota: String) -> float:
+	return obtenerEstado(idMascota).get("energia",100)
+
+func hambre(idMascota: String) -> float:
+	return obtenerEstado(idMascota).get("hambre",0)
+
+func aburrimiento(idMascota: String) -> float:
+	return obtenerEstado(idMascota).get("aburrimiento",0)
+
+func cambioEnergia(idMascota: String, delta: float) -> void:
+	var estado=obtenerEstado(idMascota)
+	estado["energia"]=clamp(estado.get("energia",100)+delta,minPosible,maxPosible)
+	cambioEstado.emit(idMascota)
 	guardarEstado()
 	
-func cambioHambre(delta: float) -> void:
-	hambre+=delta
-	if hambre>maxPosible:
-		hambre=maxPosible
-	if hambre<minPosible:
-		hambre=minPosible
-	cambioEstado.emit()
+func cambioHambre(idMascota: String, delta: float) -> void:
+	var estado=obtenerEstado(idMascota)
+	estado["hambre"]=clamp(estado.get("hambre",0)+delta,minPosible,maxPosible)
+	cambioEstado.emit(idMascota)
 	guardarEstado()
 	
-func cambioAburrimiento(delta: float) -> void:
-	aburrimiento+=delta
-	if aburrimiento>maxPosible:
-		aburrimiento=maxPosible
-	if aburrimiento<minPosible:
-		aburrimiento=minPosible
-	cambioEstado.emit()
+func cambioAburrimiento(idMascota: String, delta: float) -> void:
+	var estado=obtenerEstado(idMascota)
+	estado["aburrimiento"]=clamp(estado.get("aburrimiento",0)+delta,minPosible,maxPosible)
+	cambioEstado.emit(idMascota)
 	guardarEstado()
 
 func cargarEstado() -> void:
@@ -57,29 +68,35 @@ func cargarEstado() -> void:
 	var datos=archivo.get_var()
 	if typeof(datos)!=TYPE_DICTIONARY:
 		return
-	energia=datos.get("energia",energia)
-	hambre=datos.get("hambre",hambre)
-	aburrimiento=datos.get("aburrimiento",aburrimiento)
+	if datos.has("mascotas"):
+		estados=datos.get("mascotas",{})
+	else:
+		estados["mascota"]={
+			"energia":datos.get("energia",100),
+			"hambre":datos.get("hambre",0),
+			"aburrimiento":datos.get("aburrimiento",0)
+		}
 	aplicarTiempoCerrado(datos.get("ultimoGuardado",Time.get_unix_time_from_system()))
-	cambioEstado.emit()
+	for idMascota in estados.keys():
+		cambioEstado.emit(idMascota)
 	guardarEstado()
 
 func aplicarTiempoCerrado(ultimoGuardado: float) -> void:
 	var tiempoActual=Time.get_unix_time_from_system()
 	var segundosCerrado=max(0.0,tiempoActual-ultimoGuardado)
 	var periodos=segundosCerrado/segundosPeriodo
-	energia=clamp(energia-(perdidaEnergiaPeriodo* periodos),minPosible,maxPosible)
-	hambre=clamp(hambre+(sumaHambrePeriodo *periodos),minPosible,maxPosible)
-	aburrimiento=clamp(aburrimiento+(sumaAburrimientoPeriodo*periodos),minPosible,maxPosible)
+	for idMascota in estados.keys():
+		var estado=obtenerEstado(idMascota)
+		estado["energia"]=clamp(estado.get("energia",100)-(perdidaEnergiaPeriodo* periodos),minPosible,maxPosible)
+		estado["hambre"]=clamp(estado.get("hambre",0)+(sumaHambrePeriodo *periodos),minPosible,maxPosible)
+		estado["aburrimiento"]=clamp(estado.get("aburrimiento",0)+(sumaAburrimientoPeriodo*periodos),minPosible,maxPosible)
 
 func guardarEstado() -> void:
 	var archivo=FileAccess.open(rutaGuardado,FileAccess.WRITE)
 	if archivo==null:
 		return
 	var datos={
-		"energia": energia,
-		"hambre" :hambre,
-		"aburrimiento":aburrimiento,
+		"mascotas":estados,
 		"ultimoGuardado" : Time.get_unix_time_from_system()
 	}
 	archivo.store_var(datos)

@@ -8,7 +8,10 @@ extends Control
 @onready var botonComer:Button=$HBoxContainer/comer
 @onready var botonDormir:Button=$HBoxContainer/dormir
 
+var idEstado=""
+
 func _ready() -> void:
+	idEstado=mascota.idEstado
 	if not EstadoMascota.cambioEstado.is_connected(actualizarBarras):
 		EstadoMascota.cambioEstado.connect(actualizarBarras)
 	if not botonJugar.pressed.is_connected(_on_jugar_pressed):
@@ -20,10 +23,12 @@ func _ready() -> void:
 	actualizarBarras()
 	
 	
-func actualizarBarras() -> void:
-	barraEnergia.value=EstadoMascota.energia
-	barraHambre.value=EstadoMascota.hambre
-	barraAburrimiento.value=EstadoMascota.aburrimiento
+func actualizarBarras(idMascotaCambiada: String="") -> void:
+	if idMascotaCambiada!="" and idMascotaCambiada!=idEstado:
+		return
+	barraEnergia.value=EstadoMascota.energia(idEstado)
+	barraHambre.value=EstadoMascota.hambre(idEstado)
+	barraAburrimiento.value=EstadoMascota.aburrimiento(idEstado)
 	
 func _on_jugar_pressed() -> void:
 	mascota.jugar()
