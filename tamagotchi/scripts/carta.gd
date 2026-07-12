@@ -16,6 +16,6 @@ func _on_touch_screen_button_pressed() -> void:
 		return
 	
 	elegido = !elegido
-	$frente.visible = elegido
-	$atras.visible = !elegido
 	$AnimationPlayer.play("dar_vuelta")
+		
+	
