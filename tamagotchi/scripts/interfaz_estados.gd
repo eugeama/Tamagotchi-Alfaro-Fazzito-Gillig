@@ -1,9 +1,9 @@
 extends Control
 
 @onready var mascota:Node2D = get_parent()
-@onready var barraHambre:ProgressBar=$VBoxContainer/hambre/ProgressBar
-@onready var barraEnergia:ProgressBar=$VBoxContainer/energia/ProgressBar
-@onready var barraAburrimiento:ProgressBar=$VBoxContainer/aburrimiento/ProgressBar
+@onready var barraHambre:TextureProgressBar=$VBoxContainer/hambre/TextureProgressBar
+@onready var barraEnergia:TextureProgressBar=$VBoxContainer/energia/TextureProgressBar
+@onready var barraAburrimiento:TextureProgressBar=$VBoxContainer/aburrimiento/TextureProgressBar
 @onready var botonJugar:Button=$HBoxContainer/jugar
 @onready var botonComer:Button=$HBoxContainer/comer
 @onready var botonDormir:Button=$HBoxContainer/dormir
