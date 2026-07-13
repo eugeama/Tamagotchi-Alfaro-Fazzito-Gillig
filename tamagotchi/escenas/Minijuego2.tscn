@@ -1,33 +1,54 @@
 [gd_scene format=3 uid="uid://b2p2crtiv1egy"]
 
-[ext_resource type="Texture2D" uid="uid://dxnq5ekgsxj6l" path="res://assets/Sprites/Minijuegos/minijuego2/PiedraPapelTijera.png" id="1_gn3i5"]
+[ext_resource type="Script" uid="uid://colnilwcahlcn" path="res://scripts/minijuego2.gd" id="1_mj2sc"]
+[ext_resource type="Texture2D" uid="uid://dxnq5ekgsxj6l" path="res://assets/Sprites/Minijuegos/minijuego2/PiedraPapelTijera.png" id="2_gn3i5"]
+[ext_resource type="Texture2D" uid="uid://dyxfspvfnuakw" path="res://assets/Sprites/Minijuegos/minijuego2/piedra.png" id="3_piedra"]
+[ext_resource type="Texture2D" uid="uid://bcenfs7rcynlq" path="res://assets/Sprites/Minijuegos/minijuego2/papel.png" id="4_papel"]
+[ext_resource type="Texture2D" uid="uid://by8ds8gmueibv" path="res://assets/Sprites/Minijuegos/minijuego2/tijera.png" id="5_tijera"]
+[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="6_tqwu2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_svomv"]
-atlas = ExtResource("1_gn3i5")
+atlas = ExtResource("2_gn3i5")
 region = Rect2(0, 0, 26, 17)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpicc"]
-atlas = ExtResource("1_gn3i5")
+atlas = ExtResource("2_gn3i5")
 region = Rect2(26, 0, 26, 17)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tyu6h"]
-atlas = ExtResource("1_gn3i5")
+atlas = ExtResource("2_gn3i5")
 region = Rect2(52, 0, 26, 17)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lpq8e"]
-atlas = ExtResource("1_gn3i5")
+atlas = ExtResource("2_gn3i5")
 region = Rect2(78, 0, 26, 17)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tqwu2"]
-atlas = ExtResource("1_gn3i5")
+atlas = ExtResource("2_gn3i5")
 region = Rect2(104, 0, 26, 17)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2nfg"]
-atlas = ExtResource("1_gn3i5")
+atlas = ExtResource("2_gn3i5")
 region = Rect2(130, 0, 26, 17)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gogph"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_papel")
+}],
+"loop": false,
+"name": &"papel",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_piedra")
+}],
+"loop": false,
+"name": &"piedra",
+"speed": 1.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_svomv")
@@ -48,11 +69,32 @@ animations = [{
 "texture": SubResource("AtlasTexture_u2nfg")
 }],
 "loop": true,
-"name": &"default",
+"name": &"preparacion",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_tijera")
+}],
+"loop": false,
+"name": &"tijera",
+"speed": 1.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tpicc"]
+bg_color = Color(0.19857028, 0.10823735, 0.20066714, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 70
+corner_radius_top_right = 70
+corner_radius_bottom_right = 70
+corner_radius_bottom_left = 70
+
 [node name="Node2D" type="Node2D" unique_id=1065393273]
+script = ExtResource("1_mj2sc")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=803600504]
 offset_left = -41.0
@@ -63,7 +105,174 @@ color = Color(0.48869443, 0.30750492, 0.49372745, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=293256448]
 texture_filter = 1
-position = Vector2(194.00002, 321)
+position = Vector2(194, 321)
 scale = Vector2(15, 15)
 sprite_frames = SubResource("SpriteFrames_gogph")
-frame_progress = 0.4228389
+animation = &"preparacion"
+autoplay = "preparacion"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=2049663407]
+texture_filter = 1
+position = Vector2(958, 321)
+scale = Vector2(-15, 15)
+sprite_frames = SubResource("SpriteFrames_gogph")
+animation = &"preparacion"
+autoplay = "preparacion"
+
+[node name="Control" type="Control" parent="." unique_id=1755948869]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -39.0
+offset_right = 1192.0
+offset_bottom = 665.0
+
+[node name="LabelMonedas" type="Label" parent="Control" unique_id=901000001]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 15.0
+offset_right = 440.0
+offset_bottom = 65.0
+theme_override_fonts/font = ExtResource("6_tqwu2")
+theme_override_font_sizes/font_size = 28
+text = "Monedas: 0"
+
+[node name="LabelCuenta" type="Label" parent="Control" unique_id=901000002]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -80.0
+offset_right = 80.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_tqwu2")
+theme_override_font_sizes/font_size = 120
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelResultado" type="Label" parent="Control" unique_id=901000003]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -60.0
+offset_right = 300.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_tqwu2")
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=945688058]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -563.5
+offset_top = -183.5
+offset_right = 567.0
+offset_bottom = 185.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="PanelPiedra" type="Panel" parent="Control/HBoxContainer" unique_id=887254500]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_tpicc")
+
+[node name="BotonPiedra" type="Button" parent="Control/HBoxContainer/PanelPiedra" unique_id=1214031903]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -19.0
+offset_right = -24.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_tqwu2")
+theme_override_font_sizes/font_size = 50
+text = "
+PIEDRA"
+icon = ExtResource("3_piedra")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+text_direction = 1
+
+[node name="PanelPapel" type="Panel" parent="Control/HBoxContainer" unique_id=1622752190]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_tpicc")
+
+[node name="BotonPapel" type="Button" parent="Control/HBoxContainer/PanelPapel" unique_id=1618796341]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -4.0
+offset_right = -24.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_tqwu2")
+theme_override_font_sizes/font_size = 50
+text = "
+PAPEL"
+icon = ExtResource("4_papel")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+text_direction = 1
+
+[node name="PanelTijera" type="Panel" parent="Control/HBoxContainer" unique_id=1049403326]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_tpicc")
+
+[node name="BotonTijera" type="Button" parent="Control/HBoxContainer/PanelTijera" unique_id=860205102]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -43.0
+offset_right = -24.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_tqwu2")
+theme_override_font_sizes/font_size = 50
+text = "
+TIJERA"
+icon = ExtResource("5_tijera")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+text_direction = 1
+
+[connection signal="pressed" from="Control/HBoxContainer/PanelPiedra/BotonPiedra" to="." method="_on_boton_piedra_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/PanelPapel/BotonPapel" to="." method="_on_boton_papel_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/PanelTijera/BotonTijera" to="." method="_on_boton_tijera_pressed"]

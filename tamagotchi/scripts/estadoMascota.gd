@@ -2,6 +2,9 @@ extends Node
 signal cambioEstado(idMascota)
 
 var estados={}
+var juegoIniciado=false
+var mascotaConFoco=""
+var monedas=0
 
 const maxPosible=100
 const minPosible=0

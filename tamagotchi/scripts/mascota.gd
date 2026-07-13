@@ -58,6 +58,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and mostrandoAtributos:
 		cerrarAtributos()
 		get_viewport().set_input_as_handled()
+	if not EstadoMascota.juegoIniciado:
+		return
+	if EstadoMascota.mascotaConFoco!="" and EstadoMascota.mascotaConFoco!=idEstado:
+		return
 	if eventoTocaMascota(event) and not mostrandoAtributos:
 		mostrarAtributos()
 		get_viewport().set_input_as_handled()
@@ -76,6 +80,7 @@ func puntoTocaMascota(posicionPantalla: Vector2) -> bool:
 
 func mostrarAtributos() -> void:
 	mostrandoAtributos=true
+	EstadoMascota.mascotaConFoco=idEstado
 	detenerMovimientoIdle()
 	centroCamaraInicial=get_viewport().get_canvas_transform().affine_inverse()* (get_viewport_rect().size/2.0)
 	var centroMascota=global_position+(offsetCamaraMascota* global_scale)
@@ -95,6 +100,7 @@ func mostrarAtributos() -> void:
 
 func cerrarAtributos() -> void:
 	mostrandoAtributos=false
+	EstadoMascota.mascotaConFoco=""
 	if tweenCamara:
 		tweenCamara.kill()
 	if animacion.current_animation=="mostrarAtributos":
