@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dt45np2h22msj"]
+
+[ext_resource type="Texture2D" uid="uid://btgo1rk7s2fgf" path="res://escenas/minijuegos/juegoRitmo/arrows.webp" id="1_lp2qv"]
+[ext_resource type="Script" uid="uid://c74mas27rgrw3" path="res://escenas/minijuegos/juegoRitmo/entradas.gd" id="2_pge4x"]
+
+[node name="tecla" type="Sprite2D" unique_id=416458907]
+texture = ExtResource("1_lp2qv")
+hframes = 4
+vframes = 3
+script = ExtResource("2_pge4x")

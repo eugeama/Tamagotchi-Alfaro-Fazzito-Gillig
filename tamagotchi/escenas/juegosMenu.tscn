@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://benoc02ut60pm"]
+
+[node name="Control" type="Control" unique_id=225446221]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=299604853]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 191.0
+offset_right = 1113.0
+offset_bottom = 461.0
+
+[node name="Panel" type="Panel" parent="HBoxContainer" unique_id=1422934894]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/Panel" unique_id=1148374999]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Panel3" type="Panel" parent="HBoxContainer" unique_id=1090445042]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/Panel3" unique_id=2019677503]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Panel2" type="Panel" parent="HBoxContainer" unique_id=539098575]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/Panel2" unique_id=421059236]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0

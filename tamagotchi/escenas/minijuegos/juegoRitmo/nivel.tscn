@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://yvweh5f86xhj"]
+
+[ext_resource type="PackedScene" uid="uid://dt45np2h22msj" path="res://escenas/minijuegos/juegoRitmo/entradas.tscn" id="1_ro2m4"]
+[ext_resource type="PackedScene" uid="uid://bjr5s5u3bmlk0" path="res://escenas/minijuegos/juegoRitmo/flechas.tscn" id="2_liui4"]
+
+[node name="nivel" type="Node2D" unique_id=642834640]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=703529789]
+
+[node name="tecla" parent="." unique_id=416458907 instance=ExtResource("1_ro2m4")]
+position = Vector2(-180, 200)
+tecla = "izquierda"
+
+[node name="tecla2" parent="." unique_id=1080452493 instance=ExtResource("1_ro2m4")]
+position = Vector2(-64, 200)
+frame = 2
+tecla = "arriba"
+
+[node name="tecla3" parent="." unique_id=93694385 instance=ExtResource("1_ro2m4")]
+position = Vector2(64, 200)
+frame = 1
+tecla = "abajo"
+
+[node name="tecla4" parent="." unique_id=1244588130 instance=ExtResource("1_ro2m4")]
+position = Vector2(176, 200)
+frame = 3
+tecla = "derecha"
+
+[node name="flecha" parent="." unique_id=1506347559 instance=ExtResource("2_liui4")]
+position = Vector2(-180, -347)
