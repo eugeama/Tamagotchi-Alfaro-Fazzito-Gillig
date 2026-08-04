@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cfwdtbri314ji"]
+
+[ext_resource type="Script" uid="uid://dnsw3ovne3oys" path="res://escenas/minijuegos/juegoRitmo/scorePop.gd" id="1_bovmt"]
+[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="1_ojgt5"]
+
+[node name="scorePop" type="Control" unique_id=2122153569]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_bovmt")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=871296184]
+layout_mode = 0
+offset_left = -106.0
+offset_top = 4.0
+offset_right = 107.0
+offset_bottom = 44.0
+theme_override_colors/default_color = Color(0.77931976, 0.67508936, 0.83124167, 1)
+theme_override_colors/font_outline_color = Color(0.7775834, 0.44771898, 0.77253926, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("1_ojgt5")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "PERFECTO"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="AnimationTree" type="AnimationPlayer" parent="." unique_id=1175298555]
