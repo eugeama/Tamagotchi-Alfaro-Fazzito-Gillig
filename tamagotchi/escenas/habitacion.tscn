@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://kkt8j8co8c5x" path="res://escenas/BotonConfig.tscn" id="7_0x0rw"]
 [ext_resource type="Texture2D" uid="uid://l4vdq2p0hpxs" path="res://assets/Sprites/BotonPintura/botonPinturaHover.png" id="7_6i1o1"]
 [ext_resource type="Script" uid="uid://3lpainwgoeer" path="res://scripts/habitacion.gd" id="8_bcmsc"]
+[ext_resource type="Texture2D" uid="uid://d3rjmpon8knqr" path="res://assets/Sprites/moneda.png" id="12_megy7"]
 
 [sub_resource type="Animation" id="Animation_qqkjh"]
 length = 0.001
@@ -169,6 +170,22 @@ texture_hover = ExtResource("7_6i1o1")
 [node name="mascota2" parent="." unique_id=823898926 instance=ExtResource("1_xpk0y")]
 position = Vector2(881, 545)
 scale = Vector2(4, 4)
+
+[node name="Moneda" type="Sprite2D" parent="." unique_id=1997732177]
+position = Vector2(64, 43.000008)
+scale = Vector2(7, 7)
+texture = ExtResource("12_megy7")
+
+[node name="Label" type="Label" parent="." unique_id=453307138]
+offset_left = 122.0
+offset_top = 21.0
+offset_right = 203.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(8.0205755e-06, 3.6048832e-06, 8.259858e-06, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_6i1o1")
+theme_override_font_sizes/font_size = 40
+text = "0"
 
 [connection signal="pressed" from="MenuPrincipal/BotonStart" to="MenuPrincipal" method="_on_boton_start_pressed"]
 [connection signal="animation_finished" from="MenuPrincipal/AnimationPlayer" to="MenuPrincipal" method="_on_animation_player_animation_finished"]
