@@ -12,12 +12,17 @@ config_version=5
 
 config/name="Tamagotchi"
 run/main_scene="uid://dhaekb36mpj5q"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 EstadoMascota="*uid://cvol06qd2wsx1"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [importer_defaults]
 
@@ -31,4 +36,5 @@ animation_library={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"

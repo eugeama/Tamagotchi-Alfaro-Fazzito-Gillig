@@ -20,6 +20,7 @@ const velocidadIdleMin=45.0
 const velocidadIdleMax=95.0
 const margenMovimiento=30.0
 
+var mostrando=false
 var mostrandoAtributos=false
 var tweenCamara:Tween
 var tweenMovimiento:Tween
@@ -54,9 +55,14 @@ func obtenerIdEstado() -> String:
 		return idMascota
 	return name
 
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and mostrandoAtributos:
-		cerrarAtributos()
+		if mostrando:
+			mostrarCaja()
+		else:
+			cerrarAtributos()
 		get_viewport().set_input_as_handled()
 	if not EstadoMascota.juegoIniciado:
 		return
@@ -237,3 +243,18 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		atributos.visible=false
 	if anim_name!="idle":
 		animacion.play("idle")
+	if anim_name=="mostrarCosas" and mostrando==true:
+		animacion.play("quitarAtributos")
+
+
+func _on_guardarropa_pressed() -> void:
+	mostrarCaja()
+
+
+func mostrarCaja():
+	if !mostrando:
+		$AnimationPlayer.play("mostrarCosas")
+		mostrando=true
+	else:
+		$AnimationPlayer.play_backwards("mostrarCosas")
+		mostrando=false
