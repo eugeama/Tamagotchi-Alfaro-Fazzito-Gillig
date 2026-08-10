@@ -11,6 +11,11 @@
 [ext_resource type="Shader" uid="uid://bjc605l6jwlrv" path="res://scripts/mascota.gdshader" id="6_8c8hj"]
 [ext_resource type="Texture2D" uid="uid://dwke8vpe1goq3" path="res://assets/Sprites/HangerButton/hangerButtonPressed.png" id="6_c40mo"]
 [ext_resource type="Texture2D" uid="uid://daa2aojqxnn48" path="res://assets/Sprites/cosmeticos/propeller.png" id="11_4i0ha"]
+[ext_resource type="Theme" uid="uid://c5rygakx052lr" path="res://assets/scroll_cosmeticos.tres" id="11_c40mo"]
+[ext_resource type="Texture2D" uid="uid://dx1nmq0hh0uks" path="res://assets/Sprites/cosmeticos/Beanie.png" id="13_ntd64"]
+[ext_resource type="Texture2D" uid="uid://dnjhhqbh5wsqh" path="res://assets/Sprites/cosmeticos/TopHat.png" id="14_uk4g7"]
+[ext_resource type="PackedScene" uid="uid://b2p2crtiv1egy" path="res://escenas/Minijuego2.tscn" id="15_mj2"]
+[ext_resource type="Texture2D" uid="uid://dxnq5ekgsxj6l" path="res://assets/Sprites/Minijuegos/minijuego2/PiedraPapelTijera.png" id="16_ppt"]
 
 [sub_resource type="Animation" id="Animation_lltle"]
 resource_name = "Dormir"
@@ -180,6 +185,33 @@ tracks/9/keys = {
 "update": 0,
 "values": [Vector2(200, -235.00006)]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../PanelJuegos:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_juegos"]
+resource_name = "mostrarJuegos"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../PanelJuegos:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -100)]
+}
 
 [sub_resource type="Animation" id="Animation_vgy2f"]
 resource_name = "comer"
@@ -338,6 +370,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(200, -235.00006), Vector2(200, 615)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 8), Vector2(0, -40)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Control:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -151.99998)]
+}
 
 [sub_resource type="Animation" id="Animation_8endc"]
 resource_name = "quitarAtributos"
@@ -362,6 +418,7 @@ _data = {
 &"idle": SubResource("Animation_xci1x"),
 &"mostrarAtributos": SubResource("Animation_bseam"),
 &"mostrarCosas": SubResource("Animation_r3dgf"),
+&"mostrarJuegos": SubResource("Animation_juegos"),
 &"quitarAtributos": SubResource("Animation_8endc")
 }
 
@@ -654,30 +711,113 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="Caja2" type="Sprite2D" parent="PanelCosmeticos" unique_id=1148514245]
-position = Vector2(5.999998, 100)
+position = Vector2(5.9999986, 99.00001)
 scale = Vector2(1.8870968, 1.9473684)
 texture = ExtResource("4_5tmyl")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelCosmeticos" unique_id=341561565]
+texture_filter = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -48.0
-offset_top = 90.0
+offset_top = 84.0
 offset_right = 59.0
-offset_bottom = 108.0
+offset_bottom = 114.0
+theme = ExtResource("11_c40mo")
 vertical_scroll_mode = 0
-scroll_horizontal_by_default = true
 
 [node name="ContenedorCosmeticos" type="HBoxContainer" parent="PanelCosmeticos/ScrollContainer" unique_id=1592980888]
+texture_filter = 1
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 6
 
 [node name="TextureRect" type="TextureRect" parent="PanelCosmeticos/ScrollContainer/ContenedorCosmeticos" unique_id=1479584662]
 layout_mode = 2
 texture = ExtResource("11_4i0ha")
 
+[node name="TextureRect2" type="TextureRect" parent="PanelCosmeticos/ScrollContainer/ContenedorCosmeticos" unique_id=1221936081]
+layout_mode = 2
+texture = ExtResource("13_ntd64")
+
+[node name="TextureRect3" type="TextureRect" parent="PanelCosmeticos/ScrollContainer/ContenedorCosmeticos" unique_id=1201598984]
+layout_mode = 2
+texture = ExtResource("14_uk4g7")
+
+[node name="TextureRect4" type="TextureRect" parent="PanelCosmeticos/ScrollContainer/ContenedorCosmeticos" unique_id=1819836705]
+layout_mode = 2
+texture = ExtResource("11_4i0ha")
+
+[node name="TextureRect5" type="TextureRect" parent="PanelCosmeticos/ScrollContainer/ContenedorCosmeticos" unique_id=969549264]
+layout_mode = 2
+texture = ExtResource("11_4i0ha")
+
+[node name="TextureRect6" type="TextureRect" parent="PanelCosmeticos/ScrollContainer/ContenedorCosmeticos" unique_id=1077206757]
+layout_mode = 2
+texture = ExtResource("11_4i0ha")
+
+[node name="TextureRect7" type="TextureRect" parent="PanelCosmeticos/ScrollContainer/ContenedorCosmeticos" unique_id=207167456]
+layout_mode = 2
+texture = ExtResource("11_4i0ha")
+
+[node name="TextureRect8" type="TextureRect" parent="PanelCosmeticos/ScrollContainer/ContenedorCosmeticos" unique_id=1379420035]
+layout_mode = 2
+texture = ExtResource("11_4i0ha")
+
+[node name="PanelJuegos" type="Control" parent="." unique_id=901100001]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("11_c40mo")
+script = ExtResource("12_pcos")
+
+[node name="CajaJuegos" type="Sprite2D" parent="PanelJuegos" unique_id=901100002]
+position = Vector2(5.9999986, 99.00001)
+scale = Vector2(1.8870968, 1.9473684)
+texture = ExtResource("4_5tmyl")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelJuegos" unique_id=901100003]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 84.0
+offset_right = 59.0
+offset_bottom = 114.0
+vertical_scroll_mode = 0
+
+[node name="ContenedorJuegos" type="HBoxContainer" parent="PanelJuegos/ScrollContainer" unique_id=901100004]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 10
+
+[node name="Minijuego2" type="VBoxContainer" parent="PanelJuegos/ScrollContainer/ContenedorJuegos" unique_id=901100005]
+layout_mode = 2
+
+[node name="Miniatura" type="TextureRect" parent="PanelJuegos/ScrollContainer/ContenedorJuegos/Minijuego2" unique_id=901100006]
+layout_mode = 2
+texture = ExtResource("16_ppt")
+expand_mode = 1
+stretch_mode = 5
+custom_minimum_size = Vector2(60, 40)
+
+[node name="Nombre" type="Label" parent="PanelJuegos/ScrollContainer/ContenedorJuegos/Minijuego2" unique_id=901100007]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "Piedra\nPapel\nTijera"
+horizontal_alignment = 1
+
+[node name="BotonJugar" type="Button" parent="PanelJuegos/ScrollContainer/ContenedorJuegos/Minijuego2" unique_id=901100008]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "jugar"
+
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Control/guardarropa" to="." method="_on_guardarropa_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/jugar" to="." method="_on_jugar_pressed"]
+[connection signal="pressed" from="PanelJuegos/ScrollContainer/ContenedorJuegos/Minijuego2/BotonJugar" to="." method="_on_minijuego2_jugar_pressed"]
