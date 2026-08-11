@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cbgaqis32v5w"]
+
+[ext_resource type="Texture2D" uid="uid://dtf7bbhv4keib" path="res://assets/Sprites/StartButton/start.png" id="1_tek3t"]
+[ext_resource type="Texture2D" uid="uid://bj6wmagaldxhj" path="res://assets/Sprites/StartButton/startPressed.png" id="2_qqkjh"]
+[ext_resource type="Texture2D" uid="uid://3dt2txn1ieig" path="res://assets/Sprites/StartButton/startHover.png" id="3_fvbfk"]
+
+[node name="TextureButton" type="TextureButton" unique_id=2065374507]
+texture_filter = 1
+offset_left = -40.0
+offset_top = -13.0
+offset_right = 41.0
+offset_bottom = 12.0
+texture_normal = ExtResource("1_tek3t")
+texture_pressed = ExtResource("2_qqkjh")
+texture_hover = ExtResource("3_fvbfk")

@@ -1,6 +1,57 @@
 [gd_scene format=3 uid="uid://cxy3qwaq1q08v"]
 
 [ext_resource type="Script" uid="uid://bjo53kep3gv56" path="res://scripts/mascota.gd" id="1_xci1x"]
+[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="2_vgy2f"]
+[ext_resource type="Script" uid="uid://dylxupoq8mioj" path="res://scripts/interfaz_estados.gd" id="3_lltle"]
+[ext_resource type="Texture2D" uid="uid://c37wmyky7c41i" path="res://assets/Sprites/barraVacia.png" id="4_8endc"]
+[ext_resource type="Texture2D" uid="uid://lm45ghdw365d" path="res://assets/Sprites/barraLlena.png" id="5_8endc"]
+[ext_resource type="Shader" uid="uid://bjc605l6jwlrv" path="res://scripts/mascota.gdshader" id="6_8c8hj"]
+
+[sub_resource type="Animation" id="Animation_lltle"]
+resource_name = "Dormir"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": ["      
+    
+Z    ", "      
+   Z 
+Z    ", "      Z
+   Z 
+Z    "]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ojos/derecho/ColorRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ojos/izquierdo/ColorRect:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.1)]
+}
 
 [sub_resource type="Animation" id="Animation_d8lrb"]
 length = 0.001
@@ -16,10 +67,97 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boca:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Control:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ojos/derecho/ColorRect:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ojos/izquierdo/ColorRect:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vgy2f"]
+resource_name = "comer"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boca:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1), Vector2(1e-05, 1e-05), Vector2(1, 1), Vector2(1e-05, 1e-05), Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ojos:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.5), Vector2(1, 0.1), Vector2(1, 0.5), Vector2(1, 0.1), Vector2(1, 0.5), Vector2(1, 0.1), Vector2(1, 0.5)]
+}
 
 [sub_resource type="Animation" id="Animation_xci1x"]
 resource_name = "idle"
-length = 0.9
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -28,58 +166,363 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.2),
+"times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.15, 0.85), Vector2(1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Boca:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ojos/derecho/ColorRect:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ojos/izquierdo/ColorRect:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bseam"]
+resource_name = "mostrarAtributos"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8endc"]
+resource_name = "quitarAtributos"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vgy2f"]
 _data = {
+&"Dormir": SubResource("Animation_lltle"),
 &"RESET": SubResource("Animation_d8lrb"),
-&"idle": SubResource("Animation_xci1x")
+&"comer": SubResource("Animation_vgy2f"),
+&"idle": SubResource("Animation_xci1x"),
+&"mostrarAtributos": SubResource("Animation_bseam"),
+&"quitarAtributos": SubResource("Animation_8endc")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5tmyl"]
+shader = ExtResource("6_8c8hj")
+shader_parameter/tint_color = Color(0, 0.835, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_azul"]
+shader = ExtResource("6_8c8hj")
+shader_parameter/tint_color = Color(0, 0.4, 1, 1)
+
 [node name="mascota" type="Node2D" unique_id=1085864667]
-scale = Vector2(1.15, 0.85)
 script = ExtResource("1_xci1x")
 
-[node name="textura" type="Sprite2D" parent="." unique_id=2137662808]
+[node name="textura" type="Control" parent="." unique_id=770441881]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="textura" unique_id=1772696791]
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -14.0
+offset_right = 19.630432
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ojos" type="Control" parent="textura" unique_id=2047902668]
+anchors_preset = 0
+scale = Vector2(1, 0.5)
+
+[node name="derecho" type="Control" parent="textura/ojos" unique_id=661047496]
+anchors_preset = 0
+offset_left = -9.999997
+offset_top = -8.0
+offset_right = -9.999997
+offset_bottom = -8.0
+scale = Vector2(0.16, 0.16)
+
+[node name="ColorRect" type="ColorRect" parent="textura/ojos/derecho" unique_id=529009029]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -37.5
+offset_right = 21.0
+offset_bottom = 38.75
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13682577, 0.13682574, 0.13682571, 1)
+
+[node name="izquierdo" type="Control" parent="textura/ojos" unique_id=1898019732]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -8.0
+offset_right = 10.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.16, 0.16)
+
+[node name="ColorRect" type="ColorRect" parent="textura/ojos/izquierdo" unique_id=362661396]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.000015
+offset_top = -37.5
+offset_right = 20.999985
+offset_bottom = 38.75
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13682577, 0.13682574, 0.13682571, 1)
+
+[node name="Boca" type="Control" parent="textura" unique_id=1467447163]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+
+[node name="ColorRect2" type="ColorRect" parent="textura/Boca" unique_id=1646264467]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -5.0
+offset_right = 10.73913
+offset_bottom = 4.411762
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="textura" unique_id=215405688]
+texture_filter = 1
+layout_mode = 0
+offset_left = 23.0
+offset_top = -53.0
+offset_right = 71.0
+offset_bottom = 4.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+theme_override_constants/paragraph_spacing = -6
+theme_override_fonts/font = ExtResource("2_vgy2f")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=301025100]
 root_node = NodePath("../textura")
 libraries/ = SubResource("AnimationLibrary_vgy2f")
 
-[node name="ojos" type="Node2D" parent="." unique_id=1992357884]
-
-[node name="derecho" type="Sprite2D" parent="ojos" unique_id=150682961]
-position = Vector2(10, 20)
-scale = Vector2(0.16, 0.16)
-
-[node name="ColorRect" type="ColorRect" parent="ojos/derecho" unique_id=529009029]
-custom_minimum_size = Vector2(16, 16)
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.13682577, 0.13682574, 0.13682571, 1)
-
-[node name="izquierdo" type="Sprite2D" parent="ojos" unique_id=366711428]
-position = Vector2(25, 20)
-scale = Vector2(0.16, 0.16)
-
-[node name="ColorRect" type="ColorRect" parent="ojos/izquierdo" unique_id=362661396]
-custom_minimum_size = Vector2(16, 16)
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.13682577, 0.13682574, 0.13682571, 1)
-
-[node name="animacionOjos" type="AnimationPlayer" parent="ojos" unique_id=532369279]
-
 [node name="Timer" type="Timer" parent="." unique_id=1495420839]
 wait_time = 3.0
 autostart = true
 
+[node name="Control" type="Control" parent="." unique_id=380147004]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.2, 0.2)
+script = ExtResource("3_lltle")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=861224784]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -162.00006
+offset_top = -306.0
+offset_right = 134.99991
+offset_bottom = -191.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="hambre" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=34596806]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/hambre" unique_id=1895842171]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "hambre: "
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/VBoxContainer/hambre" unique_id=415392224]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+nine_patch_stretch = true
+texture_under = ExtResource("4_8endc")
+texture_progress = ExtResource("5_8endc")
+
+[node name="energia" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=2145161992]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/energia" unique_id=762381245]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "energia: "
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/VBoxContainer/energia" unique_id=529149938]
+texture_filter = 1
+material = SubResource("ShaderMaterial_5tmyl")
+layout_mode = 2
+size_flags_horizontal = 3
+nine_patch_stretch = true
+texture_under = ExtResource("4_8endc")
+texture_progress = ExtResource("5_8endc")
+
+[node name="aburrimiento" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=502191865]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/aburrimiento" unique_id=544991245]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "aburrimiento:"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/VBoxContainer/aburrimiento" unique_id=669147626]
+texture_filter = 1
+material = SubResource("ShaderMaterial_azul")
+layout_mode = 2
+size_flags_horizontal = 3
+nine_patch_stretch = true
+texture_under = ExtResource("4_8endc")
+texture_progress = ExtResource("5_8endc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=147019194]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.68700004
+anchor_right = 0.5
+anchor_bottom = 0.68700004
+offset_left = -183.0
+offset_top = -165.48
+offset_right = 160.0
+offset_bottom = -114.48005
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="jugar" type="Button" parent="Control/HBoxContainer" unique_id=36432558]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "jugar
+"
+
+[node name="comer" type="Button" parent="Control/HBoxContainer" unique_id=986498177]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "comer"
+
+[node name="dormir" type="Button" parent="Control/HBoxContainer" unique_id=293070165]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+text = "dormir"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=262901266]
+position = Vector2(0, -16)
+enabled = false
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
