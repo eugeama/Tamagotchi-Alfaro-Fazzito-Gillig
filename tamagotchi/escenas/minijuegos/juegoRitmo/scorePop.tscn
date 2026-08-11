@@ -3,6 +3,81 @@
 [ext_resource type="Script" uid="uid://dnsw3ovne3oys" path="res://escenas/minijuegos/juegoRitmo/scorePop.gd" id="1_bovmt"]
 [ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="1_ojgt5"]
 
+[sub_resource type="Animation" id="Animation_bovmt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RichTextLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-106, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_w5qhj"]
+resource_name = "fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RichTextLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0009999999, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.003921569), Color(1, 1, 1, 1), Color(1, 1, 1, 0.0039215684)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.43333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-106, 4), Vector2(-106, 8)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.4333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_om2i6"]
+_data = {
+&"RESET": SubResource("Animation_bovmt"),
+&"fade": SubResource("Animation_w5qhj")
+}
+
 [node name="scorePop" type="Control" unique_id=2122153569]
 layout_mode = 3
 anchors_preset = 0
@@ -14,17 +89,21 @@ script = ExtResource("1_bovmt")
 layout_mode = 0
 offset_left = -106.0
 offset_top = 4.0
-offset_right = 107.0
-offset_bottom = 44.0
+offset_right = 117.0
+offset_bottom = 51.0
 theme_override_colors/default_color = Color(0.77931976, 0.67508936, 0.83124167, 1)
 theme_override_colors/font_outline_color = Color(0.7775834, 0.44771898, 0.77253926, 1)
-theme_override_constants/shadow_outline_size = 20
-theme_override_constants/outline_size = 5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.09803922)
+theme_override_constants/shadow_outline_size = 10
+theme_override_constants/outline_size = 10
 theme_override_fonts/normal_font = ExtResource("1_ojgt5")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "PERFECTO"
+text = " PERFECTO"
 scroll_active = false
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="AnimationTree" type="AnimationPlayer" parent="." unique_id=1175298555]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1978490100]
+libraries/ = SubResource("AnimationLibrary_om2i6")
+autoplay = &"fade"

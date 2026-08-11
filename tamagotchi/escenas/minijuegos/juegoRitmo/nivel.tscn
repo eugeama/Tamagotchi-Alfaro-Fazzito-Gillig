@@ -2,8 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://dt45np2h22msj" path="res://escenas/minijuegos/juegoRitmo/entradas.tscn" id="1_ro2m4"]
 [ext_resource type="PackedScene" uid="uid://bnx5qify478vj" path="res://escenas/minijuegos/juegoRitmo/ui.tscn" id="3_3hcop"]
+[ext_resource type="Texture2D" uid="uid://b5pug0vgnmskc" path="res://escenas/minijuegos/juegoRitmo/fondoTemporal.jpg" id="3_wt5of"]
+
+[sub_resource type="Environment" id="Environment_3hcop"]
+background_mode = 3
+glow_enabled = true
 
 [node name="nivel" type="Node2D" unique_id=642834640]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1845762791]
+texture = ExtResource("3_wt5of")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=703529789]
 
@@ -27,3 +35,6 @@ frame = 3
 tecla = "derecha"
 
 [node name="ui" parent="." unique_id=1016094875 instance=ExtResource("3_3hcop")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=812411374]
+environment = SubResource("Environment_3hcop")
