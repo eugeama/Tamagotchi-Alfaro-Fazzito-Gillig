@@ -8,3 +8,39 @@ script = ExtResource("1_0ghod")
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1171519226]
 offset_right = 1155.0
 offset_bottom = 651.0
+color = Color(0.99999994, 0.92412287, 0.85840225, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="." unique_id=1896234186]
+offset_left = 477.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 537.0
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=233307700]
+offset_left = 1158.0
+offset_top = 1.999999
+offset_right = 1720.1707
+offset_bottom = 42.003662
+rotation = 1.5731299
+color = Color(0.14112562, 0.0698277, 3.008172e-08, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="." unique_id=1204920958]
+offset_left = 494.99994
+offset_top = -2.0000002
+offset_right = 1065.2233
+offset_bottom = 38.003662
+rotation = 1.5731299
+color = Color(0.14112562, 0.0698277, 3.008172e-08, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="." unique_id=2138532808]
+offset_left = 488.0
+offset_top = 526.0
+offset_right = 1155.0
+offset_bottom = 568.0
+color = Color(0.14112562, 0.0698277, 3.008172e-08, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1909391080]
+offset_left = 492.0
+offset_right = 1159.0
+offset_bottom = 32.0
+color = Color(0.14112562, 0.0698277, 3.008172e-08, 1)
