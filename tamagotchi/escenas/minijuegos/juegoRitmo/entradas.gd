@@ -13,12 +13,18 @@ var genialScr:int=200
 var bienScr:int=100
 var okScr:int=50
 
-func ready():
-	$brillo.frame=frame+4
+func _ready():
+	Seniales.generarFlecha.connect(generarFlecha)
 func inicio():
 	set_process(false)
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed(tecla):
+		Seniales.teclaPresionada.emit(tecla, frame)
+	
 	if !listaFlechas.is_empty():
+		if not is_instance_valid(listaFlechas.front()):
+			listaFlechas.pop_front()
+			return
 		if listaFlechas.front().fuera:
 			listaFlechas.pop_front()
 			var popUpPuntaje=popUp.instantiate()
@@ -28,8 +34,6 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed(tecla):
 			var flechaHit=listaFlechas.front()
 			var distancia=abs(global_position.y-flechaHit.global_position.y)
-			$AnimationPlayer.stop()
-			$AnimationPlayer.play()
 			var leyendaScore:String=" "
 			if distancia<distPerfecto:
 				Seniales.aumentarPuntaje.emit(perfectoScr)
@@ -59,14 +63,15 @@ func _process(delta: float) -> void:
 			popUpPuntaje.setInfoPuntaje(leyendaScore)
 			popUpPuntaje.global_position=global_position+Vector2(0,-20)
 			
-func generarFlecha():
-	var nuevaFlecha=flecha.instantiate()
-	get_tree().get_root().call_deferred("add_child",nuevaFlecha)
-	nuevaFlecha.Setup(position.x,frame+4)
-	listaFlechas.push_back(nuevaFlecha)
+func generarFlecha(teclaInput:String):
+	if teclaInput==tecla:
+		var nuevaFlecha=flecha.instantiate()
+		get_tree().get_root().call_deferred("add_child",nuevaFlecha)
+		nuevaFlecha.Setup(position.x,frame+4)
+		listaFlechas.push_back(nuevaFlecha)
 
 
 func _on_aparicion_flechas_timeout() -> void:
-	generarFlecha()
+	#generarFlecha()
 	$aparicionFlechas.wait_time=randf_range(1.5,3)
 	$aparicionFlechas.start()
