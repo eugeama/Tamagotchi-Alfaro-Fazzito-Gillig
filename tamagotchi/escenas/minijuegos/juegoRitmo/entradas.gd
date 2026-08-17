@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 			get_tree().get_root().call_deferred("add_child", popUpPuntaje)
 			popUpPuntaje.setInfoPuntaje("...")
 			popUpPuntaje.global_position=global_position+Vector2(0,-20)
-		if Input.is_action_just_pressed(tecla):
+		if !listaFlechas.is_empty() and Input.is_action_just_pressed(tecla):
 			var flechaHit=listaFlechas.front()
 			var distancia=abs(global_position.y-flechaHit.global_position.y)
 			var leyendaScore:String=" "
