@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://yvweh5f86xhj"]
+
+[ext_resource type="Texture2D" uid="uid://71hduho3g0pe" path="res://escenas/minijuegos/juegoRitmo/fondo.jpg" id="1_o3qev"]
+[ext_resource type="PackedScene" uid="uid://dt45np2h22msj" path="res://escenas/minijuegos/juegoRitmo/entradas.tscn" id="1_ro2m4"]
+[ext_resource type="PackedScene" uid="uid://bnx5qify478vj" path="res://escenas/minijuegos/juegoRitmo/ui.tscn" id="3_3hcop"]
+[ext_resource type="Texture2D" uid="uid://cwo4vu4djhrq8" path="res://escenas/minijuegos/juegoRitmo/estrellas.png" id="3_o3qev"]
+[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="4_qnu6w"]
+[ext_resource type="PackedScene" uid="uid://b87b55nncgcf6" path="res://escenas/minijuegos/juegoRitmo/controlador_musica.tscn" id="4_wt5of"]
+
+[node name="nivel" type="Node2D" unique_id=642834640]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1845762791]
+modulate = Color(1, 1, 1, 0.43137255)
+position = Vector2(0.2794156, 5.722046e-06)
+scale = Vector2(0.9746112, 0.8175)
+texture = ExtResource("1_o3qev")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=703529789]
+
+[node name="tecla" parent="." unique_id=416458907 instance=ExtResource("1_ro2m4")]
+position = Vector2(-180, 200)
+texture = ExtResource("3_o3qev")
+tecla = "izquierda"
+
+[node name="Label" type="Label" parent="tecla" unique_id=2095224342]
+offset_left = -18.0
+offset_top = 31.0
+offset_right = 24.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("4_qnu6w")
+theme_override_font_sizes/font_size = 20
+text = "(S)"
+horizontal_alignment = 1
+
+[node name="tecla2" parent="." unique_id=1080452493 instance=ExtResource("1_ro2m4")]
+position = Vector2(-64, 200)
+texture = ExtResource("3_o3qev")
+frame = 2
+tecla = "arriba"
+
+[node name="Label" type="Label" parent="tecla2" unique_id=274474480]
+offset_left = -22.0
+offset_top = 31.0
+offset_right = 20.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("4_qnu6w")
+theme_override_font_sizes/font_size = 20
+text = "(F)"
+horizontal_alignment = 1
+
+[node name="tecla3" parent="." unique_id=93694385 instance=ExtResource("1_ro2m4")]
+position = Vector2(64, 200)
+texture = ExtResource("3_o3qev")
+frame = 1
+tecla = "abajo"
+
+[node name="Label" type="Label" parent="tecla3" unique_id=1921962616]
+offset_left = -18.0
+offset_top = 31.0
+offset_right = 24.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("4_qnu6w")
+theme_override_font_sizes/font_size = 20
+text = "(J)"
+horizontal_alignment = 1
+
+[node name="tecla4" parent="." unique_id=1244588130 instance=ExtResource("1_ro2m4")]
+position = Vector2(176, 200)
+texture = ExtResource("3_o3qev")
+frame = 3
+tecla = "derecha"
+
+[node name="Label" type="Label" parent="tecla4" unique_id=670686247]
+offset_left = -23.0
+offset_top = 31.0
+offset_right = 19.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("4_qnu6w")
+theme_override_font_sizes/font_size = 20
+text = "(L)"
+horizontal_alignment = 1
+
+[node name="ui" parent="." unique_id=1016094875 instance=ExtResource("3_3hcop")]
+
+[node name="controladorMusica" parent="." unique_id=899808519 instance=ExtResource("4_wt5of")]

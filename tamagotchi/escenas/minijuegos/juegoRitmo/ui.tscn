@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bnx5qify478vj"]
+
+[ext_resource type="Script" uid="uid://dsfiaefibi325" path="res://escenas/minijuegos/juegoRitmo/ui.gd" id="1_07kte"]
+[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="1_yo2ku"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_07kte"]
+
+[node name="ui" type="Control" unique_id=1016094875]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_07kte")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=126221681]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=1142998078]
+offset_left = 28.0
+offset_top = 34.0
+offset_right = 401.0
+offset_bottom = 118.0
+theme_override_fonts/normal_font = ExtResource("1_yo2ku")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxEmpty_07kte")
+text = "0 PUNTOS"

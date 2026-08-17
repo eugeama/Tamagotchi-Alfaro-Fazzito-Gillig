@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://byriux3uxkx80"]
+
+[ext_resource type="Script" uid="uid://bxmyfxyaao1w7" path="res://escenas/minijuegos/juegoRitmo/seniales.gd" id="1_ja6j2"]
+
+[node name="seniales" type="Node2D" unique_id=352946854]
+script = ExtResource("1_ja6j2")

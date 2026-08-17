@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bjr5s5u3bmlk0"]
+
+[ext_resource type="Texture2D" uid="uid://cwo4vu4djhrq8" path="res://escenas/minijuegos/juegoRitmo/estrellas.png" id="1_7t3uf"]
+[ext_resource type="Script" uid="uid://d3wney4frwtm6" path="res://escenas/minijuegos/juegoRitmo/flechas.gd" id="2_7t3uf"]
+
+[node name="flecha" type="Sprite2D" unique_id=1506347559]
+position = Vector2(4, 3)
+scale = Vector2(1.137931, 1.0833334)
+texture = ExtResource("1_7t3uf")
+hframes = 4
+vframes = 3
+frame = 4
+script = ExtResource("2_7t3uf")
+
+[node name="Timer" type="Timer" parent="." unique_id=1136057126]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="EliminarTimer" type="Timer" parent="." unique_id=1296442065]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="EliminarTimer" to="." method="_on_eliminar_timer_timeout"]
