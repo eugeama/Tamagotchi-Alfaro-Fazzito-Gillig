@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btgo1rk7s2fgf"
-path="res://.godot/imported/arrows.webp-e6d358ec9fc075409afa10c3a52c0fc6.ctex"
+uid="uid://71hduho3g0pe"
+path="res://.godot/imported/fondo.jpg-afbf3465ad19631dcacb9d447e2669b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://escenas/minijuegos/juegoRitmo/arrows.webp"
-dest_files=["res://.godot/imported/arrows.webp-e6d358ec9fc075409afa10c3a52c0fc6.ctex"]
+source_file="res://escenas/minijuegos/juegoRitmo/fondo.jpg"
+dest_files=["res://.godot/imported/fondo.jpg-afbf3465ad19631dcacb9d447e2669b3.ctex"]
 
 [params]
 
