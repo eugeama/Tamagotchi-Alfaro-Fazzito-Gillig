@@ -1,0 +1,54 @@
+[gd_resource type="Theme" format=3 uid="uid://c5rygakx052lr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grab"]
+content_margin_top = -6.0
+content_margin_bottom = -6.0
+bg_color = Color(0.16656294, 0.43332243, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grab_hl"]
+content_margin_top = -6.0
+content_margin_bottom = -6.0
+bg_color = Color(0.48104864, 0.6081747, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grab_pr"]
+content_margin_top = -6.0
+content_margin_bottom = -6.0
+bg_color = Color(0, 0.6748349, 0.9849611, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_track"]
+content_margin_top = 2.0
+content_margin_bottom = -6.0
+bg_color = Color(0.81792396, 0.918025, 0.999294, 0.7019608)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[resource]
+HScrollBar/constants/grab_click_outside = 1
+HScrollBar/constants/scroll_handle_min_length = 10
+HScrollBar/styles/decrement = SubResource("StyleBoxEmpty_btn")
+HScrollBar/styles/decrement_highlight = SubResource("StyleBoxEmpty_btn")
+HScrollBar/styles/decrement_pressed = SubResource("StyleBoxEmpty_btn")
+HScrollBar/styles/grabber = SubResource("StyleBoxFlat_grab")
+HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_grab_hl")
+HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_grab_pr")
+HScrollBar/styles/increment = SubResource("StyleBoxEmpty_btn")
+HScrollBar/styles/increment_highlight = SubResource("StyleBoxEmpty_btn")
+HScrollBar/styles/increment_pressed = SubResource("StyleBoxEmpty_btn")
+HScrollBar/styles/scroll = SubResource("StyleBoxFlat_track")
+HScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_btn")

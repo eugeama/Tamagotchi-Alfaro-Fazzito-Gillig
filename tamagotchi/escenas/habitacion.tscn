@@ -172,6 +172,7 @@ position = Vector2(881, 545)
 scale = Vector2(4, 4)
 
 [node name="Moneda" type="Sprite2D" parent="." unique_id=1997732177]
+texture_filter = 1
 position = Vector2(64, 43.000008)
 scale = Vector2(7, 7)
 texture = ExtResource("12_megy7")

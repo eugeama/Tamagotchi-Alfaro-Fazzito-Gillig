@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dyr0ruck4of0x"]
 
 [ext_resource type="Script" uid="uid://dryudacti5omx" path="res://scripts/carta.gd" id="1_yo80u"]
-[ext_resource type="Texture2D" uid="uid://d04ad7fl2tsfb" path="res://assets/sillys/00a032e1e6d6b4b1498276e56953b468.jpg" id="2_up28s"]
 [ext_resource type="Texture2D" uid="uid://nt1b3cnordp1" path="res://assets/sillys/d96e1f94ce57f1e5afe9c4e17a372bfc.jpg" id="3_sllcx"]
+[ext_resource type="Texture2D" uid="uid://d04ad7fl2tsfb" path="res://assets/sillys/00a032e1e6d6b4b1498276e56953b468.jpg" id="3_up28s"]
 
 [sub_resource type="Animation" id="Animation_sllcx"]
 tracks/0/type = "value"
@@ -132,14 +132,14 @@ position = Vector2(158, 138)
 script = ExtResource("1_yo80u")
 
 [node name="frente" type="Sprite2D" parent="." unique_id=1454488521]
-position = Vector2(0.5, -0.1250019)
-scale = Vector2(0.17255436, 0.16808648)
-texture = ExtResource("2_up28s")
+position = Vector2(0.4999981, -3.8146973e-06)
+scale = Vector2(0.08831523, 0.07608694)
+texture = ExtResource("3_sllcx")
 
 [node name="atras" type="Sprite2D" parent="." unique_id=1271778042]
 position = Vector2(0, -1)
 scale = Vector2(0.094, 0.082)
-texture = ExtResource("3_sllcx")
+texture = ExtResource("3_up28s")
 
 [node name="TouchScreenButton" type="Button" parent="." unique_id=1719225350]
 offset_left = -64.0

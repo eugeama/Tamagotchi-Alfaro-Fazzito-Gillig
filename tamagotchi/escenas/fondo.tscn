@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://d4hnit8v6rs6d" path="res://scripts/fondo.gd" id="1_0ghod"]
 [ext_resource type="Script" uid="uid://dsfiaefibi325" path="res://escenas/minijuegos/juegoRitmo/ui.gd" id="2_8geac"]
-[ext_resource type="Script" uid="uid://bbdn3yj7173v5" path="res://scripts/intentos.gd" id="3_intentos"]
-[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/DePixelHalbfett.ttf" id="4_p4cdk"]
+[ext_resource type="Script" uid="uid://b5odeeu07dpsm" path="res://scripts/intentos.gd" id="3_intentos"]
+[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="4_p4cdk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_07kte"]
 
@@ -60,16 +60,6 @@ script = ExtResource("3_intentos")
 [node name="CanvasLayer" type="CanvasLayer" parent="ui2" unique_id=362635709]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ui2/CanvasLayer" unique_id=1292697241]
-offset_left = 25.0
-offset_top = 88.0
-offset_right = 398.0
-offset_bottom = 172.0
-theme_override_fonts/normal_font = ExtResource("4_p4cdk")
-theme_override_font_sizes/normal_font_size = 22
-theme_override_styles/normal = SubResource("StyleBoxEmpty_07kte")
-text = "Intentos: 10"
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="ui2/CanvasLayer" unique_id=119123594]
 offset_left = 25.0
 offset_top = 88.0
 offset_right = 398.0
