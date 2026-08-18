@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 EstadoMascota="*uid://cvol06qd2wsx1"
 Seniales="*uid://bxmyfxyaao1w7"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
 [importer_defaults]
 
 animation_library={
@@ -55,5 +60,6 @@ derecha={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 viewport/hdr_2d=true

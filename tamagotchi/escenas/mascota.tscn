@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cxy3qwaq1q08v"]
 
 [ext_resource type="Script" uid="uid://bjo53kep3gv56" path="res://scripts/mascota.gd" id="1_xci1x"]
-[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="2_vgy2f"]
+[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/DePixelHalbfett.ttf" id="2_vgy2f"]
 [ext_resource type="Script" uid="uid://dylxupoq8mioj" path="res://scripts/interfaz_estados.gd" id="3_lltle"]
 [ext_resource type="Texture2D" uid="uid://4i1ux0yfugmp" path="res://assets/Sprites/Caja.png" id="4_5tmyl"]
 [ext_resource type="Texture2D" uid="uid://c37wmyky7c41i" path="res://assets/Sprites/barraVacia.png" id="4_8endc"]
