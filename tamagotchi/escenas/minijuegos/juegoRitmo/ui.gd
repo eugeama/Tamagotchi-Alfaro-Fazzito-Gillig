@@ -6,7 +6,5 @@ func _ready() -> void:
 func aumentarPuntaje(puntos:int):
 	puntaje+=puntos
 	$CanvasLayer/RichTextLabel.text=str(puntaje)+ " PUNTOS"
-	if puntaje >= 50:
-		puntaje_ganador.emit()
 func _process(delta: float) -> void:
 	pass
