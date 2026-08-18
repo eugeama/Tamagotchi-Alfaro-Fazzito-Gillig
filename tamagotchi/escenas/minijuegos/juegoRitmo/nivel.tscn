@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://yvweh5f86xhj"]
 
-[ext_resource type="Texture2D" uid="uid://71hduho3g0pe" path="res://escenas/minijuegos/juegoRitmo/fondo.jpg" id="1_o3qev"]
+[ext_resource type="Texture2D" uid="uid://b05mcr2xhivqd" path="res://escenas/minijuegos/juegoRitmo/fondoRitmo.png" id="1_o3qev"]
 [ext_resource type="PackedScene" uid="uid://dt45np2h22msj" path="res://escenas/minijuegos/juegoRitmo/entradas.tscn" id="1_ro2m4"]
 [ext_resource type="PackedScene" uid="uid://bnx5qify478vj" path="res://escenas/minijuegos/juegoRitmo/ui.tscn" id="3_3hcop"]
-[ext_resource type="Texture2D" uid="uid://cwo4vu4djhrq8" path="res://escenas/minijuegos/juegoRitmo/estrellas.png" id="3_o3qev"]
 [ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="4_qnu6w"]
 [ext_resource type="PackedScene" uid="uid://b87b55nncgcf6" path="res://escenas/minijuegos/juegoRitmo/controlador_musica.tscn" id="4_wt5of"]
 
@@ -11,15 +10,14 @@
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1845762791]
 modulate = Color(1, 1, 1, 0.43137255)
-position = Vector2(0.2794156, 5.722046e-06)
-scale = Vector2(0.9746112, 0.8175)
+position = Vector2(-3.7305658, 5.0625305)
+scale = Vector2(5.7873054, 6.518751)
 texture = ExtResource("1_o3qev")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=703529789]
 
 [node name="tecla" parent="." unique_id=416458907 instance=ExtResource("1_ro2m4")]
 position = Vector2(-180, 200)
-texture = ExtResource("3_o3qev")
 tecla = "izquierda"
 
 [node name="Label" type="Label" parent="tecla" unique_id=2095224342]
@@ -34,7 +32,6 @@ horizontal_alignment = 1
 
 [node name="tecla2" parent="." unique_id=1080452493 instance=ExtResource("1_ro2m4")]
 position = Vector2(-64, 200)
-texture = ExtResource("3_o3qev")
 frame = 2
 tecla = "arriba"
 
@@ -50,7 +47,6 @@ horizontal_alignment = 1
 
 [node name="tecla3" parent="." unique_id=93694385 instance=ExtResource("1_ro2m4")]
 position = Vector2(64, 200)
-texture = ExtResource("3_o3qev")
 frame = 1
 tecla = "abajo"
 
@@ -66,7 +62,6 @@ horizontal_alignment = 1
 
 [node name="tecla4" parent="." unique_id=1244588130 instance=ExtResource("1_ro2m4")]
 position = Vector2(176, 200)
-texture = ExtResource("3_o3qev")
 frame = 3
 tecla = "derecha"
 

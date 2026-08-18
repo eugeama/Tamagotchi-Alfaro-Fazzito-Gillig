@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://crm5hqm183b4m"]
+
+[node name="MenuJuegos" type="CanvasLayer" unique_id=1213885948]
+
+[node name="fondo" type="Sprite2D" parent="." unique_id=1509983892]
