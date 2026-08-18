@@ -19,15 +19,13 @@ func _ready() -> void:
 	idEstado=mascota.idEstado
 	if not EstadoMascota.cambioEstado.is_connected(actualizarBarras):
 		EstadoMascota.cambioEstado.connect(actualizarBarras)
-	if not botonJugar.pressed.is_connected(_on_jugar_pressed):
-		botonJugar.pressed.connect(_on_jugar_pressed)
 	if not botonComer.pressed.is_connected(_on_comer_pressed):
 		botonComer.pressed.connect(_on_comer_pressed)
 	if not botonDormir.pressed.is_connected(_on_dormir_pressed):
 		botonDormir.pressed.connect(_on_dormir_pressed)
 	actualizarBarras()
-	
-	
+
+
 func actualizarBarras(idMascotaCambiada: String="") -> void:
 	if idMascotaCambiada!="" and idMascotaCambiada!=idEstado:
 		return
@@ -38,9 +36,7 @@ func actualizarBarras(idMascotaCambiada: String="") -> void:
 func _valorBarra(stat: float) -> float:
 	var n = clamp(int(floor(stat / 10.0)), 0, 10)
 	return CORTE_BARRA[n]
-	
-func _on_jugar_pressed() -> void:
-	mascota.jugar()
+
 func _on_comer_pressed() -> void:
 	mascota.comer()
 func _on_dormir_pressed() -> void:

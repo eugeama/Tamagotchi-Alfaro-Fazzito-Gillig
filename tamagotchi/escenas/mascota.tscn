@@ -3,9 +3,14 @@
 [ext_resource type="Script" uid="uid://bjo53kep3gv56" path="res://scripts/mascota.gd" id="1_xci1x"]
 [ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="2_vgy2f"]
 [ext_resource type="Script" uid="uid://dylxupoq8mioj" path="res://scripts/interfaz_estados.gd" id="3_lltle"]
+[ext_resource type="Texture2D" uid="uid://4i1ux0yfugmp" path="res://assets/Sprites/Caja.png" id="4_5tmyl"]
 [ext_resource type="Texture2D" uid="uid://c37wmyky7c41i" path="res://assets/Sprites/barraVacia.png" id="4_8endc"]
+[ext_resource type="Texture2D" uid="uid://dkyoy2n03cui7" path="res://assets/Sprites/HangerButton/hangerButton.png" id="4_r3dgf"]
+[ext_resource type="Texture2D" uid="uid://kmqgelcgwjsg" path="res://assets/Sprites/HangerButton/hangerButtonHover.png" id="5_4i0ha"]
 [ext_resource type="Texture2D" uid="uid://lm45ghdw365d" path="res://assets/Sprites/barraLlena.png" id="5_8endc"]
 [ext_resource type="Shader" uid="uid://bjc605l6jwlrv" path="res://scripts/mascota.gdshader" id="6_8c8hj"]
+[ext_resource type="Texture2D" uid="uid://dwke8vpe1goq3" path="res://assets/Sprites/HangerButton/hangerButtonPressed.png" id="6_c40mo"]
+[ext_resource type="Texture2D" uid="uid://bsel5clxv75hh" path="res://assets/Sprites/cosmeticos/propeller.png" id="11_4i0ha"]
 
 [sub_resource type="Animation" id="Animation_lltle"]
 resource_name = "Dormir"
@@ -127,6 +132,54 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 8)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../PanelCosmeticos:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../Control:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../Control/guardarropa:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(200, -235.00006)]
+}
 
 [sub_resource type="Animation" id="Animation_vgy2f"]
 resource_name = "comer"
@@ -235,6 +288,57 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_r3dgf"]
+resource_name = "mostrarCosas"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 8), Vector2(0, -40)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PanelCosmeticos:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-6, 0), Vector2(-6, -100)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Control:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -151.99998)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Control/guardarropa:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(200, -235.00006), Vector2(200, 615)]
+}
+
 [sub_resource type="Animation" id="Animation_8endc"]
 resource_name = "quitarAtributos"
 tracks/0/type = "value"
@@ -257,6 +361,7 @@ _data = {
 &"comer": SubResource("Animation_vgy2f"),
 &"idle": SubResource("Animation_xci1x"),
 &"mostrarAtributos": SubResource("Animation_bseam"),
+&"mostrarCosas": SubResource("Animation_r3dgf"),
 &"quitarAtributos": SubResource("Animation_8endc")
 }
 
@@ -278,6 +383,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_top = 8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -411,6 +518,24 @@ offset_bottom = 40.0
 scale = Vector2(0.2, 0.2)
 script = ExtResource("3_lltle")
 
+[node name="guardarropa" type="TextureButton" parent="Control" unique_id=131443179]
+texture_filter = 1
+layout_mode = 0
+offset_left = 200.0
+offset_top = -235.00006
+offset_right = 235.0
+offset_bottom = -201.00006
+scale = Vector2(1.3, 1.3)
+texture_normal = ExtResource("4_r3dgf")
+texture_pressed = ExtResource("6_c40mo")
+texture_hover = ExtResource("5_4i0ha")
+
+[node name="Caja" type="Sprite2D" parent="Control" unique_id=759762894]
+texture_filter = 1
+position = Vector2(8, -161.75002)
+scale = Vector2(6, 11.236842)
+texture = ExtResource("4_5tmyl")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=861224784]
 layout_mode = 1
 anchors_preset = 12
@@ -419,7 +544,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -162.00006
 offset_top = -306.0
-offset_right = 134.99991
+offset_right = 139.99997
 offset_bottom = -191.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -524,5 +649,36 @@ text = "dormir"
 position = Vector2(0, -16)
 enabled = false
 
+[node name="PanelCosmeticos" type="Control" parent="." unique_id=1545514500]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Caja2" type="Sprite2D" parent="PanelCosmeticos" unique_id=1148514245]
+texture_filter = 1
+position = Vector2(5.999998, 100)
+scale = Vector2(1.8870968, 1.9473684)
+texture = ExtResource("4_5tmyl")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelCosmeticos" unique_id=341561565]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 90.0
+offset_right = 59.0
+offset_bottom = 108.0
+vertical_scroll_mode = 0
+
+[node name="ContenedorCosmeticos" type="HBoxContainer" parent="PanelCosmeticos/ScrollContainer" unique_id=1592980888]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="PanelCosmeticos/ScrollContainer/ContenedorCosmeticos" unique_id=1479584662]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("11_4i0ha")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Control/guardarropa" to="." method="_on_guardarropa_pressed"]

@@ -8,6 +8,7 @@ const OPCIONES = ["piedra", "papel", "tijera"]
 @onready var labelResultado:Label = $Control/LabelResultado
 @onready var labelMonedas:Label = $Control/LabelMonedas
 @onready var panelEleccion:HBoxContainer = $Control/HBoxContainer
+@export var count_speed: float = 5.0
 
 var gananciaActual = 10
 var esperando = false
@@ -20,7 +21,7 @@ func _ready() -> void:
 	spriteMaquina.play("preparacion")
 
 func _actualizarMonedas() -> void:
-	labelMonedas.text = "Monedas: %d" % EstadoMascota.monedas
+	$Timermonedas.start()
 
 func _on_boton_piedra_pressed() -> void:
 	_elegir(0)
@@ -56,13 +57,15 @@ func _resolver(eleccionJugador: int) -> void:
 		var ganado = gananciaActual
 		EstadoMascota.monedas += ganado
 		gananciaActual *= 2
-		labelResultado.text = "¡GANASTE!\n+%d monedas" % ganado
+		labelResultado.text = "¡GANASTE!\n\n\n\n+%d monedas" % ganado
+		labelMonedas.position= Vector2(497,270)
 	elif resultado == -1:
 		EstadoMascota.monedas = 0
 		gananciaActual = 10
-		labelResultado.text = "¡PERDISTE!\nMonedas perdidas"
+		labelResultado.text = "¡PERDISTE!\n\n\n\nMonedas perdidas"
+		labelMonedas.position= Vector2(497,270)
 	else:
-		labelResultado.text = "EMPATE"
+		labelResultado.text = "EMPATE\n\n\n\n"
 
 	_actualizarMonedas()
 	await get_tree().create_timer(2.0).timeout
@@ -76,8 +79,29 @@ func _calcularResultado(jugador: int, maquina: int) -> int:
 	return -1
 
 func _reiniciarRonda() -> void:
+	labelMonedas.position= Vector2(60,15)
 	labelResultado.visible = false
 	panelEleccion.visible = true
 	spriteJugador.play("preparacion")
 	spriteMaquina.play("preparacion")
 	esperando = false
+
+
+func _on_timermonedas_timeout() -> void:
+	var regex= RegEx.new()
+	regex.compile("\\d+") 
+	var resultado = regex.search(labelMonedas.text)
+	
+	var valor_actual: int = int(resultado.get_string()) if resultado else 0
+	var valor_final: int = EstadoMascota.monedas
+	
+	if valor_actual == valor_final:
+		return
+	var monedas_por_segundo: float= 150.0 
+	var distancia: int = abs(valor_final - valor_actual)
+	var duracion: float = distancia / monedas_por_segundo
+	
+	var tween = create_tween()
+	tween.tween_method(
+		func(valor_intermedio: int): labelMonedas.text = "Monedas: %d" % valor_intermedio,valor_actual,valor_final,duracion
+	)

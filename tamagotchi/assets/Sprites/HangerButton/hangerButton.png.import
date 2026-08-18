@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi1vrqe7bqirv"
-path="res://.godot/imported/fondoFinished.jpg-dcbc8f447df83c4571a3ce73867e5df5.ctex"
+uid="uid://dkyoy2n03cui7"
+path="res://.godot/imported/hangerButton.png-52a8dcbfb18dacef5c3f570b7eea1409.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://escenas/minijuegos/fondoFinished.jpg"
-dest_files=["res://.godot/imported/fondoFinished.jpg-dcbc8f447df83c4571a3ce73867e5df5.ctex"]
+source_file="res://assets/Sprites/HangerButton/hangerButton.png"
+dest_files=["res://.godot/imported/hangerButton.png-52a8dcbfb18dacef5c3f570b7eea1409.ctex"]
 
 [params]
 

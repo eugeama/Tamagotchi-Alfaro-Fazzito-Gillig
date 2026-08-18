@@ -20,7 +20,9 @@ const velocidadIdleMin=45.0
 const velocidadIdleMax=95.0
 const margenMovimiento=30.0
 
+var mostrando=false
 var mostrandoAtributos=false
+var mostrandoJuegos=false
 var tweenCamara:Tween
 var tweenMovimiento:Tween
 var centroCamaraInicial=Vector2.ZERO
@@ -54,9 +56,16 @@ func obtenerIdEstado() -> String:
 		return idMascota
 	return name
 
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and mostrandoAtributos:
-		cerrarAtributos()
+		if mostrandoJuegos:
+			_cerrarJuegos()
+		elif mostrando:
+			mostrarCaja()
+		else:
+			cerrarAtributos()
 		get_viewport().set_input_as_handled()
 	if not EstadoMascota.juegoIniciado:
 		return
@@ -237,3 +246,32 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		atributos.visible=false
 	if anim_name!="idle":
 		animacion.play("idle")
+
+
+func _on_jugar_pressed() -> void:
+	if not mostrandoJuegos:
+		animacion.play("mostrarJuegos")
+		mostrandoJuegos=true
+	else:
+		_cerrarJuegos()
+
+func _cerrarJuegos() -> void:
+	animacion.play_backwards("mostrarJuegos")
+	mostrandoJuegos=false
+
+func _on_minijuego2_jugar_pressed() -> void:
+	_cerrarJuegos()
+	cerrarAtributos()
+	get_tree().change_scene_to_packed(load("res://escenas/Minijuego2.tscn"))
+
+func _on_guardarropa_pressed() -> void:
+	mostrarCaja()
+
+
+func mostrarCaja():
+	if !mostrando:
+		$AnimationPlayer.play("mostrarCosas")
+		mostrando=true
+	else:
+		$AnimationPlayer.play_backwards("mostrarCosas")
+		mostrando=false
