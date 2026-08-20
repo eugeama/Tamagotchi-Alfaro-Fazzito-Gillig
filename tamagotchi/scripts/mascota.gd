@@ -1,11 +1,14 @@
 extends Node2D
 @export var idMascota=""
+@export_enum("jade", "ragatha", "vi") var tipoBichito="jade"
+@export var spriteBaseMiraDerecha=false
 
 @onready var animacion: AnimationPlayer = $AnimationPlayer
 @onready var timer: Timer = $Timer
 @onready var camara: Camera2D = $Camera2D
 @onready var atributos: Control = $Control
 @onready var textura: Control = $textura
+@onready var spriteBichito: Sprite2D = $textura/SpriteBichito
 
 const perdidaEnergiaPeriodica=5.0
 const sumaHambrePeriodica=10.0
@@ -19,6 +22,28 @@ const pausaIdleMax=3.5
 const velocidadIdleMin=45.0
 const velocidadIdleMax=95.0
 const margenMovimiento=30.0
+const carpetaBichitosBase="res://assets/bichitos"
+
+const archivosPorBichito={
+	"jade": {
+		"idle": "normalJ.png",
+		"caminar": "caminando.png",
+		"comer": "comiendo.png",
+		"dormir": "durmiendo.png"
+	},
+	"ragatha": {
+		"idle": "normalR 1.png",
+		"caminar": "caminandoR.png",
+		"comer": "comiendoR.png",
+		"dormir": "durmiendoR.png"
+	},
+	"vi": {
+		"idle": "normalV.png",
+		"caminar": "caminandoV.png",
+		"comer": "comiendoV.png",
+		"dormir": "durmiendoV.png"
+	}
+}
 
 var mostrando=false
 var mostrandoAtributos=false
@@ -29,35 +54,57 @@ var centroCamaraInicial=Vector2.ZERO
 var offsetCamaraMascota=Vector2.ZERO
 var random=RandomNumberGenerator.new()
 var idEstado=""
+var texturasBichito={}
 
 func _enter_tree() -> void:
 	idEstado=obtenerIdEstado()
 	EstadoMascota.obtenerEstado(idEstado)
-
+	
 func _ready() -> void:
 	animacion.play("idle")
 	if not EstadoMascota.cambioEstado.is_connected(actualizarAnimacion):
 		EstadoMascota.cambioEstado.connect(actualizarAnimacion)
 	random.randomize()
+	inicializarVisualBichito()
 	offsetCamaraMascota=camara.position
 	atributos.visible=false
 	atributos.modulate=Color(1,1,1,0)
 	camara.enabled=false
 	ignorarMouseEnVisuales(textura)
 	iniciarMovimientoIdle()
-
+	
 func _on_timer_timeout() -> void:
 	EstadoMascota.cambioEnergia(idEstado,-perdidaEnergiaPeriodica)
 	EstadoMascota.cambioHambre(idEstado,+sumaHambrePeriodica)
 	EstadoMascota.cambioAburrimiento(idEstado,+sumaAburrimientoPeriodica)
-
+	actualizarAnimacion(idEstado)
+	
+func inicializarVisualBichito() -> void:
+	texturasBichito=cargarTexturasBichito(tipoBichito)
+	aplicarSpriteEstado("idle")
+	
+func cargarTexturasBichito(tipo: String) -> Dictionary:
+	var resultado={}
+	if not archivosPorBichito.has(tipo):
+		return resultado
+	for estado in archivosPorBichito[tipo].keys():
+		var ruta=carpetaBichitosBase+"/"+tipo+"/"+archivosPorBichito[tipo][estado]
+		var textura=load(ruta)
+		if textura is Texture2D:
+			resultado[estado]=textura
+	return resultado
+	
+func aplicarSpriteEstado(estado: String) -> void:
+	if texturasBichito.has(estado):
+		spriteBichito.texture=texturasBichito[estado]
+	elif texturasBichito.has("idle"):
+		spriteBichito.texture=texturasBichito["idle"]
+		
 func obtenerIdEstado() -> String:
 	if idMascota!="":
 		return idMascota
 	return name
-
-
-
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and mostrandoAtributos:
 		if mostrandoJuegos:
@@ -67,6 +114,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			cerrarAtributos()
 		get_viewport().set_input_as_handled()
+	if mostrandoAtributos and eventoPresion(event):
+		var puntoPantalla=obtenerPosicionPantalla(event)
+		if puntoPantalla!=null and not puntoTocaMascota(puntoPantalla) and not puntoEnPanelAtributos(puntoPantalla):
+			if mostrandoJuegos:
+				_cerrarJuegos()
+			if mostrando:
+				mostrarCaja()
+			cerrarAtributos()
+			get_viewport().set_input_as_handled()
+			return
 	if not EstadoMascota.juegoIniciado:
 		return
 	if EstadoMascota.mascotaConFoco!="" and EstadoMascota.mascotaConFoco!=idEstado:
@@ -74,19 +131,38 @@ func _unhandled_input(event: InputEvent) -> void:
 	if eventoTocaMascota(event) and not mostrandoAtributos:
 		mostrarAtributos()
 		get_viewport().set_input_as_handled()
-
+		
 func eventoTocaMascota(event: InputEvent) -> bool:
 	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and event.pressed:
 		return puntoTocaMascota(event.position)
 	if event is InputEventScreenTouch and event.pressed:
 		return puntoTocaMascota(event.position)
 	return false
-
+	
+func eventoPresion(event: InputEvent) -> bool:
+	if event is InputEventMouseButton:
+		return event.button_index==MOUSE_BUTTON_LEFT and event.pressed
+	if event is InputEventScreenTouch:
+		return event.pressed
+	return false
+	
+func obtenerPosicionPantalla(event: InputEvent):
+	if event is InputEventMouseButton:
+		return event.position
+	if event is InputEventScreenTouch:
+		return event.position
+	return null
+	
 func puntoTocaMascota(posicionPantalla: Vector2) -> bool:
 	var posicionMundo=get_viewport().get_canvas_transform().affine_inverse()* posicionPantalla
 	var posicionLocal=to_local(posicionMundo)
 	return abs(posicionLocal.x)<=areaToque.x and abs(posicionLocal.y)<=areaToque.y
-
+	
+func puntoEnPanelAtributos(posicionPantalla: Vector2) -> bool:
+	if not atributos.visible:
+		return false
+	return atributos.get_global_rect().has_point(posicionPantalla)
+	
 func mostrarAtributos() -> void:
 	mostrandoAtributos=true
 	EstadoMascota.mascotaConFoco=idEstado
@@ -106,7 +182,7 @@ func mostrarAtributos() -> void:
 	tweenCamara.set_parallel(true)
 	tweenCamara.tween_property(camara,"zoom",zoomEnMascota,duracionZoom)
 	tweenCamara.tween_property(camara,"global_position",posicionCamaraLimitada(zoomEnMascota,centroMascota),duracionZoom)
-
+	
 func cerrarAtributos() -> void:
 	mostrandoAtributos=false
 	EstadoMascota.mascotaConFoco=""
@@ -121,19 +197,19 @@ func cerrarAtributos() -> void:
 	tweenCamara.tween_property(camara,"zoom",zoomNormal,duracionSalida)
 	tweenCamara.tween_property(camara,"global_position",centroCamaraInicial,duracionSalida)
 	tweenCamara.finished.connect(_on_cerrar_atributos_terminado)
-
+	
 func posicionCamaraLimitada(zoomObjetivo: Vector2, posicionObjetivo: Vector2) -> Vector2:
 	var rectFondo=obtenerRectFondo()
 	var mitadVisible=(get_viewport_rect().size/zoomObjetivo)/2.0
 	posicionObjetivo.x=limitarEje(posicionObjetivo.x,rectFondo.position.x +mitadVisible.x,rectFondo.end.x-mitadVisible.x,rectFondo.get_center().x)
 	posicionObjetivo.y=limitarEje(posicionObjetivo.y,rectFondo.position.y+ mitadVisible.y,rectFondo.end.y-mitadVisible.y,rectFondo.get_center().y)
 	return posicionObjetivo
-
+	
 func limitarEje(valor: float, minimo: float, maximo: float, centro: float) -> float:
 	if minimo>maximo:
 		return centro
 	return clamp(valor,minimo,maximo)
-
+	
 func obtenerRectFondo() -> Rect2:
 	var fondo=get_parent().get_node_or_null("Fondo")
 	var piso=get_parent().get_node_or_null("Piso")
@@ -154,34 +230,47 @@ func obtenerRectFondo() -> Rect2:
 	var centro=get_viewport().get_canvas_transform().affine_inverse()* (get_viewport_rect().size/2.0)
 	var tamano=get_viewport_rect().size
 	return Rect2(centro-(tamano/2.0),tamano)
-
+	
 func rectSprite(sprite: Sprite2D) -> Rect2:
 	var tamano=sprite.texture.get_size()* sprite.global_scale.abs()
 	return Rect2(sprite.global_position-(tamano/2.0),tamano)
-
+	
 func obtenerDuracionAnimacion(nombre: StringName, duracionDefecto: float) -> float:
 	if animacion.has_animation(nombre):
 		return animacion.get_animation(nombre).length
 	return duracionDefecto
-
+	
 func _on_cerrar_atributos_terminado() -> void:
 	atributos.visible=false
 	camara.enabled=false
-
+	
 func iniciarMovimientoIdle() -> void:
 	while is_inside_tree():
 		await get_tree().create_timer(random.randf_range(pausaIdleMin,pausaIdleMax)).timeout
 		if mostrandoAtributos or not is_inside_tree():
 			continue
 		var destino=posicionIdleRandom()
+		actualizarOrientacionSegunDireccion(destino.x-global_position.x)
 		var distancia=abs(destino.x-global_position.x)
 		if distancia<5.0:
 			continue
 		var duracion=distancia/random.randf_range(velocidadIdleMin,velocidadIdleMax)
+		aplicarSpriteEstado("caminar")
 		tweenMovimiento=create_tween()
 		tweenMovimiento.tween_property(self,"global_position",destino,duracion)
 		await get_tree().create_timer(duracion).timeout
-
+		if not mostrandoAtributos:
+			aplicarSpriteEstado("idle")
+			
+func actualizarOrientacionSegunDireccion(deltaX: float) -> void:
+	if abs(deltaX)<0.001:
+		return
+	var vaDerecha=deltaX>0.0
+	if spriteBaseMiraDerecha:
+		spriteBichito.flip_h=not vaDerecha
+	else:
+		spriteBichito.flip_h=vaDerecha
+		
 func posicionIdleRandom() -> Vector2:
 	var rectFondo=obtenerRectFondo()
 	var margen=(margenMovimiento*abs(global_scale.x))
@@ -193,36 +282,29 @@ func posicionIdleRandom() -> Vector2:
 	else:
 		destino.x=random.randf_range(minimo,maximo)
 	return destino
-
+	
 func detenerMovimientoIdle() -> void:
 	if tweenMovimiento:
 		tweenMovimiento.kill()
-
+		
 func ignorarMouseEnVisuales(nodo: Node) -> void:
 	if nodo is Control:
 		nodo.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	for hijo in nodo.get_children():
 		ignorarMouseEnVisuales(hijo)
-
+		
 func actualizarAnimacion(idMascotaCambiada: String="") -> void:
 	if idMascotaCambiada!="" and idMascotaCambiada!=idEstado:
 		return
-	#pass
-	"""
-	para cuando gtengamos los sprites chicoooos
+	if mostrandoAtributos:
+		return
 	var hambre=EstadoMascota.hambre(idEstado)
 	var energia=EstadoMascota.energia(idEstado)
 	var aburrimiento=EstadoMascota.aburrimiento(idEstado)
-	
-	if hambre>50:
-		cambiarAnimacion("hambriento")
-	elif energia<50:
-		cambiarAnimacion("cansado")
-	elif aburrimiento>50:
-		cambiarAnimacion("aburrido")
+	if hambre>=70 or energia<=30 or aburrimiento>=70:
+		aplicarSpriteEstado("caminar")
 	else:
-		cambiarAnimacion("idle")
-		"""
+		aplicarSpriteEstado("idle")
 func cambiarAnimacion(nombre:String)-> void:
 	if animacion.current_animation!=nombre:
 		animacion.play(nombre)
@@ -231,43 +313,46 @@ func dormir() -> void:
 	EstadoMascota.cambioEnergia(idEstado,+50)
 	EstadoMascota.cambioHambre(idEstado,+10)
 	EstadoMascota.cambioAburrimiento(idEstado,+20)
+	aplicarSpriteEstado("dormir")
 	animacion.play("Dormir")
 func comer() -> void:
 	EstadoMascota.cambioHambre(idEstado,-30)
+	aplicarSpriteEstado("comer")
 	animacion.play("comer")
 func jugar() -> void:
 	#aca va el juegou
 	EstadoMascota.cambioAburrimiento(idEstado,-20)
 	EstadoMascota.cambioEnergia(idEstado,-10)
-
-
+	actualizarAnimacion(idEstado)
+	
+	
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name=="quitarAtributos":
 		atributos.visible=false
 	if anim_name!="idle":
+		aplicarSpriteEstado("idle")
 		animacion.play("idle")
-
-
+		
+		
 func _on_jugar_pressed() -> void:
 	if not mostrandoJuegos:
 		animacion.play("mostrarJuegos")
 		mostrandoJuegos=true
 	else:
 		_cerrarJuegos()
-
+		
 func _cerrarJuegos() -> void:
 	animacion.play_backwards("mostrarJuegos")
 	mostrandoJuegos=false
-
+	
 func _on_minijuego2_jugar_pressed() -> void:
 	_cerrarJuegos()
 	cerrarAtributos()
 	get_tree().change_scene_to_packed(load("res://escenas/Minijuego2.tscn"))
-
+	
 func _on_guardarropa_pressed() -> void:
 	mostrarCaja()
-
-
+	
 func mostrarCaja():
 	if !mostrando:
 		$AnimationPlayer.play("mostrarCosas")

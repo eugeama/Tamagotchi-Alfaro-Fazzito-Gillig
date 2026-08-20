@@ -116,6 +116,8 @@ texture = ExtResource("2_ul666")
 [node name="mascota" parent="." unique_id=1085864667 instance=ExtResource("1_xpk0y")]
 position = Vector2(243, 545)
 scale = Vector2(4, 4)
+idMascota = "mascota"
+tipoBichito = "jade"
 
 [node name="MenuPrincipal" type="CanvasLayer" parent="." unique_id=1486056118]
 script = ExtResource("5_mhhel")
@@ -170,6 +172,8 @@ texture_hover = ExtResource("7_6i1o1")
 [node name="mascota2" parent="." unique_id=823898926 instance=ExtResource("1_xpk0y")]
 position = Vector2(881, 545)
 scale = Vector2(4, 4)
+idMascota = "mascota2"
+tipoBichito = "ragatha"
 
 [node name="Moneda" type="Sprite2D" parent="." unique_id=1997732177]
 texture_filter = 1
