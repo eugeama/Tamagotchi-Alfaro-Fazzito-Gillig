@@ -8,3 +8,9 @@ func aumentarPuntaje(puntos:int):
 	$CanvasLayer/RichTextLabel.text=str(puntaje)+ " PUNTOS"
 func _process(delta: float) -> void:
 	pass
+
+func _on_volver_pressed() -> void:
+	var monedas_ganadas= max(0, puntaje /10)
+	EstadoMascota.monedas +=monedas_ganadas
+	EstadoMascota.guardarEstado()
+	get_tree().change_scene_to_file("res://escenas/habitacion.tscn")

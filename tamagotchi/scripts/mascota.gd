@@ -2,6 +2,9 @@ extends Node2D
 @export var idMascota=""
 @export_enum("jade", "ragatha", "vi") var tipoBichito="jade"
 @export var spriteBaseMiraDerecha=false
+@export var alturaMascotaJuegos :float= 50.0
+@export var alturaStatsJuegos: float =80.0
+@export var alturaPanelJuegos :float= 25.0
 
 @onready var animacion: AnimationPlayer = $AnimationPlayer
 @onready var timer: Timer = $Timer
@@ -9,6 +12,9 @@ extends Node2D
 @onready var atributos: Control = $Control
 @onready var textura: Control = $textura
 @onready var spriteBichito: Sprite2D = $textura/SpriteBichito
+@onready var panelMinijuegos: Control = $PanelMinijuegos
+@onready var contenedorCosmeticos: HBoxContainer = $PanelCosmeticos/ScrollContainer/ContenedorCosmeticos
+@onready var cosmeticoEquipado: Sprite2D = $textura/CosmeticoEquipado
 
 const perdidaEnergiaPeriodica=5.0
 const sumaHambrePeriodica=10.0
@@ -71,6 +77,8 @@ func _ready() -> void:
 	atributos.modulate=Color(1,1,1,0)
 	camara.enabled=false
 	ignorarMouseEnVisuales(textura)
+	poblarCosmeticos()
+	actualizarEquipado()
 	iniciarMovimientoIdle()
 	
 func _on_timer_timeout() -> void:
@@ -336,19 +344,40 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		
 func _on_jugar_pressed() -> void:
 	if not mostrandoJuegos:
-		animacion.play("mostrarJuegos")
 		mostrandoJuegos=true
+		_tweenLevantarJuegos()
 	else:
 		_cerrarJuegos()
 		
 func _cerrarJuegos() -> void:
-	animacion.play_backwards("mostrarJuegos")
 	mostrandoJuegos=false
+	panelMinijuegos.modulate= Color(1, 1, 1, 0)
+	_tweenBajarJuegos()
+	
+func _tweenLevantarJuegos() -> void:
+	var t= create_tween()
+	t.set_parallel(true)
+	t.tween_property(textura, "position", Vector2(0, 8 -alturaMascotaJuegos), 0.5)
+	t.tween_property(atributos, "position", Vector2(0, -alturaStatsJuegos), 0.5)
+	t.tween_property(panelMinijuegos, "position", Vector2(0, -alturaPanelJuegos), 0.5)
+	t.tween_property(panelMinijuegos, "modulate", Color(1, 1, 1, 1), 0.5)
+
+func _tweenBajarJuegos() -> void:
+	var t= create_tween()
+	t.set_parallel(true)
+	t.tween_property(textura, "position", Vector2(0, 8), 0.5)
+	t.tween_property(atributos, "position", Vector2(0, 0), 0.5)
+	t.tween_property(panelMinijuegos, "position", Vector2(0, 0), 0.5)
 	
 func _on_minijuego2_jugar_pressed() -> void:
 	_cerrarJuegos()
 	cerrarAtributos()
 	get_tree().change_scene_to_packed(load("res://escenas/Minijuego2.tscn"))
+	
+func _on_ritmo_jugar_pressed() -> void:
+	_cerrarJuegos()
+	cerrarAtributos()
+	get_tree().change_scene_to_packed(load("res://escenas/minijuegos/juegoRitmo/nivel.tscn"))
 	
 func _on_guardarropa_pressed() -> void:
 	mostrarCaja()
@@ -357,6 +386,43 @@ func mostrarCaja():
 	if !mostrando:
 		$AnimationPlayer.play("mostrarCosas")
 		mostrando=true
+		actualizarCosmeticos()
 	else:
 		$AnimationPlayer.play_backwards("mostrarCosas")
 		mostrando=false
+
+const escenaCarta= preload("res://escenas/cosmetico_carta.tscn")
+
+func poblarCosmeticos() -> void:
+	for hijo in contenedorCosmeticos.get_children():
+		hijo.queue_free()
+	for id in EstadoMascota.CATALOGO_COSMETICOS.keys():
+		var datos= EstadoMascota.CATALOGO_COSMETICOS[id]
+		var carta= escenaCarta.instantiate()
+		contenedorCosmeticos.add_child(carta)
+		var tex= load(datos["textura"]) as Texture2D
+		carta.setup(id, tex, datos["precio"], idEstado)
+		carta.carta_presionada.connect(_on_cosmetico_presionado)
+
+func actualizarCosmeticos() -> void:
+	for carta in contenedorCosmeticos.get_children():
+		if carta.has_method("actualizarVisual"):
+			carta.actualizarVisual()
+
+func _on_cosmetico_presionado(id: String) -> void:
+	if EstadoMascota.cosmeticsDesbloqueados.has(id):
+		EstadoMascota.equiparCosmetico(idEstado, id)
+	else:
+		if EstadoMascota.comprarCosmetico(id):
+			EstadoMascota.equiparCosmetico(idEstado, id)
+	actualizarCosmeticos()
+	actualizarEquipado()
+
+func actualizarEquipado() -> void:
+	var idEquipado= EstadoMascota.cosmeticoPuesto.get(idEstado, "")
+	if idEquipado=="" or not EstadoMascota.CATALOGO_COSMETICOS.has(idEquipado):
+		cosmeticoEquipado.visible= false
+		return
+	var ruta= EstadoMascota.CATALOGO_COSMETICOS[idEquipado]["textura"]
+	cosmeticoEquipado.texture= load(ruta)
+	cosmeticoEquipado.visible =true

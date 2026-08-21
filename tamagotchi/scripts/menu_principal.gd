@@ -1,5 +1,9 @@
 extends CanvasLayer
 
+func _ready() -> void:
+	if EstadoMascota.juegoIniciado:
+		visible=false
+
 
 func esconderMenu():
 	$AnimationPlayer.play("desaparecer")

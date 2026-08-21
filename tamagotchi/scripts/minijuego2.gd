@@ -12,6 +12,7 @@ const OPCIONES = ["piedra", "papel", "tijera"]
 
 var gananciaActual = 10
 var esperando = false
+var pptPot =0
 
 func _ready() -> void:
 	labelCuenta.visible = false
@@ -51,16 +52,22 @@ func _resolver(eleccionJugador: int) -> void:
 	spriteMaquina.play(OPCIONES[eleccionMaquina])
 
 	var resultado = _calcularResultado(eleccionJugador, eleccionMaquina)
+	print("[PPT] resultado=", resultado, " | monedas antes=", EstadoMascota.monedas)
 	labelResultado.visible = true
 
 	if resultado == 1:
 		var ganado = gananciaActual
 		EstadoMascota.monedas += ganado
+		print("[PPT] monedas despues de sumar=", EstadoMascota.monedas)
+		EstadoMascota.guardarEstado()
+		pptPot +=ganado
 		gananciaActual *= 2
 		labelResultado.text = "¡GANASTE!\n\n\n\n+%d monedas" % ganado
 		labelMonedas.position= Vector2(497,270)
 	elif resultado == -1:
-		EstadoMascota.monedas = 0
+		EstadoMascota.monedas =max(0, EstadoMascota.monedas -pptPot)
+		EstadoMascota.guardarEstado()
+		pptPot =0
 		gananciaActual = 10
 		labelResultado.text = "¡PERDISTE!\n\n\n\nMonedas perdidas"
 		labelMonedas.position= Vector2(497,270)
@@ -105,3 +112,7 @@ func _on_timermonedas_timeout() -> void:
 	tween.tween_method(
 		func(valor_intermedio: int): labelMonedas.text = "Monedas: %d" % valor_intermedio,valor_actual,valor_final,duracion
 	)
+
+func _on_volver_pressed() -> void:
+	EstadoMascota.guardarEstado()
+	get_tree().change_scene_to_file("res://escenas/habitacion.tscn")

@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://l4vdq2p0hpxs" path="res://assets/Sprites/BotonPintura/botonPinturaHover.png" id="7_6i1o1"]
 [ext_resource type="Script" uid="uid://3lpainwgoeer" path="res://scripts/habitacion.gd" id="8_bcmsc"]
 [ext_resource type="Texture2D" uid="uid://d3rjmpon8knqr" path="res://assets/Sprites/moneda.png" id="12_megy7"]
+[ext_resource type="AudioStream" uid="uid://b6v4fylojkfm8" path="res://assets/Audio/Musica/MusicaPrincipal.mp3" id="13_1h1og"]
 
 [sub_resource type="Animation" id="Animation_qqkjh"]
 length = 0.001
@@ -117,7 +118,6 @@ texture = ExtResource("2_ul666")
 position = Vector2(243, 545)
 scale = Vector2(4, 4)
 idMascota = "mascota"
-tipoBichito = "jade"
 
 [node name="MenuPrincipal" type="CanvasLayer" parent="." unique_id=1486056118]
 script = ExtResource("5_mhhel")
@@ -191,6 +191,11 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_6i1o1")
 theme_override_font_sizes/font_size = 40
 text = "0"
+
+[node name="MusicaPrincipal" type="AudioStreamPlayer" parent="." unique_id=504901086]
+stream = ExtResource("13_1h1og")
+volume_db = -8.792
+autoplay = true
 
 [connection signal="pressed" from="MenuPrincipal/BotonStart" to="MenuPrincipal" method="_on_boton_start_pressed"]
 [connection signal="animation_finished" from="MenuPrincipal/AnimationPlayer" to="MenuPrincipal" method="_on_animation_player_animation_finished"]

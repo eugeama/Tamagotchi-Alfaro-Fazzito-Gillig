@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cosmetico_carta"]
+
+[ext_resource type="Script" path="res://scripts/cosmetico_carta.gd" id="1_carta"]
+[ext_resource type="FontFile" uid="uid://dhvvhh0tujn32" path="res://assets/Fuentes/DePixelHalbfett.ttf" id="2_font"]
+
+[node name="cosmetico_carta" type="Control"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+script = ExtResource("1_carta")
+
+[node name="Boton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ignore_texture_size = true
+stretch_mode = 5
+theme_override_colors/hover = Color(0.7, 0.7, 0.7, 1)
+theme_override_colors/pressed = Color(0.5, 0.5, 0.5, 1)
+
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.15, 0.15, 0.15, 0.72)
+mouse_filter = 2
+
+[node name="FilaPrecio" type="HBoxContainer" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="Moneda" type="TextureRect" parent="Overlay/FilaPrecio"]
+texture_filter = 1
+layout_mode = 2
+custom_minimum_size = Vector2(8, 8)
+size_flags_vertical = 4
+expand_mode = 1
+
+[node name="Precio" type="Label" parent="Overlay/FilaPrecio"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 8
+
+[connection signal="pressed" from="Boton" to="." method="_on_boton_pressed"]

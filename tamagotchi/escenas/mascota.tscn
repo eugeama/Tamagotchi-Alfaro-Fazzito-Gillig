@@ -10,7 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://lm45ghdw365d" path="res://assets/Sprites/barraLlena.png" id="5_8endc"]
 [ext_resource type="Shader" uid="uid://bjc605l6jwlrv" path="res://scripts/mascota.gdshader" id="6_8c8hj"]
 [ext_resource type="Texture2D" uid="uid://dwke8vpe1goq3" path="res://assets/Sprites/HangerButton/hangerButtonPressed.png" id="6_c40mo"]
-[ext_resource type="Texture2D" uid="uid://bsel5clxv75hh" path="res://assets/Sprites/cosmeticos/propeller.png" id="11_4i0ha"]
+[ext_resource type="Texture2D" uid="uid://cls0ccpqbgxd" path="res://assets/Sprites/Minijuegos/minijuego2/miniaturaMinijuego2.png" id="12_miniMj2"]
+[ext_resource type="Texture2D" uid="uid://b05mcr2xhivqd" path="res://escenas/minijuegos/juegoRitmo/fondoRitmo.png" id="13_fondoRitmo"]
 
 [sub_resource type="Animation" id="Animation_lltle"]
 resource_name = "Dormir"
@@ -119,6 +120,30 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(200, -235.00006)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../PanelMinijuegos:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../PanelMinijuegos:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_vgy2f"]
@@ -231,6 +256,58 @@ tracks/3/keys = {
 "values": [Vector2(200, -235.00006), Vector2(200, 615)]
 }
 
+[sub_resource type="Animation" id="Animation_mstJuegos"]
+resource_name = "mostrarJuegos"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 8), Vector2(0, -20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Control:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -20)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PanelMinijuegos:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -20)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../PanelMinijuegos:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_8endc"]
 resource_name = "quitarAtributos"
 tracks/0/type = "value"
@@ -254,6 +331,7 @@ _data = {
 &"idle": SubResource("Animation_xci1x"),
 &"mostrarAtributos": SubResource("Animation_bseam"),
 &"mostrarCosas": SubResource("Animation_r3dgf"),
+&"mostrarJuegos": SubResource("Animation_mstJuegos"),
 &"quitarAtributos": SubResource("Animation_8endc")
 }
 
@@ -267,6 +345,9 @@ shader_parameter/tint_color = Color(0, 0.4, 1, 1)
 
 [node name="mascota" type="Node2D" unique_id=1085864667]
 script = ExtResource("1_xci1x")
+alturaMascotaJuegos = 30.0
+alturaStatsJuegos = 100.0
+alturaPanelJuegos = 100.0
 
 [node name="textura" type="Control" parent="." unique_id=770441881]
 layout_mode = 3
@@ -283,6 +364,12 @@ grow_vertical = 2
 [node name="SpriteBichito" type="Sprite2D" parent="textura" unique_id=112233445]
 texture_filter = 1
 position = Vector2(0, -11.000001)
+scale = Vector2(1.5, 1.5)
+
+[node name="CosmeticoEquipado" type="Sprite2D" parent="textura" unique_id=-1994967295]
+visible = false
+texture_filter = 1
+position = Vector2(0, -28)
 scale = Vector2(1.5, 1.5)
 
 [node name="Label" type="Label" parent="textura" unique_id=215405688]
@@ -460,21 +547,93 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = 90.0
-offset_right = 59.0
-offset_bottom = 108.0
+offset_left = -49.0
+offset_top = 87.0
+offset_right = 61.0
+offset_bottom = 113.0
 vertical_scroll_mode = 0
 
 [node name="ContenedorCosmeticos" type="HBoxContainer" parent="PanelCosmeticos/ScrollContainer" unique_id=1592980888]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 4
 
-[node name="TextureRect" type="TextureRect" parent="PanelCosmeticos/ScrollContainer/ContenedorCosmeticos" unique_id=1479584662]
+[node name="PanelMinijuegos" type="Control" parent="." unique_id=-2094967295]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+
+[node name="CajaJuegos" type="Sprite2D" parent="PanelMinijuegos" unique_id=-2094967294]
+texture_filter = 1
+position = Vector2(4.7683716e-07, 100)
+scale = Vector2(1.9032259, 2)
+texture = ExtResource("4_5tmyl")
+
+[node name="HBoxJuegos" type="HBoxContainer" parent="PanelMinijuegos" unique_id=-2094967293]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.0
+offset_top = 81.0
+offset_right = 74.0
+offset_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="VBoxMinijuego2" type="VBoxContainer" parent="PanelMinijuegos/HBoxJuegos" unique_id=-2094967292]
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("11_4i0ha")
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="NombreMinijuego2" type="Label" parent="PanelMinijuegos/HBoxJuegos/VBoxMinijuego2" unique_id=-2094967290]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+theme_override_font_sizes/font_size = 2
+text = "Piedra Papel Tijera"
+horizontal_alignment = 1
+
+[node name="MiniaturaMinijuego2" type="TextureButton" parent="PanelMinijuegos/HBoxJuegos/VBoxMinijuego2" unique_id=-2094967291]
+texture_filter = 1
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("12_miniMj2")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="VBoxRitmo" type="VBoxContainer" parent="PanelMinijuegos/HBoxJuegos" unique_id=-2094967288]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="NombreRitmo" type="Label" parent="PanelMinijuegos/HBoxJuegos/VBoxRitmo" unique_id=-2094967286]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_vgy2f")
+theme_override_font_sizes/font_size = 2
+text = "Juego de Ritmo"
+horizontal_alignment = 1
+
+[node name="MiniaturaRitmo" type="TextureButton" parent="PanelMinijuegos/HBoxJuegos/VBoxRitmo" unique_id=-2094967287]
+texture_filter = 1
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("13_fondoRitmo")
+ignore_texture_size = true
+stretch_mode = 5
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Control/guardarropa" to="." method="_on_guardarropa_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/jugar" to="." method="_on_jugar_pressed"]
+[connection signal="pressed" from="PanelMinijuegos/HBoxJuegos/VBoxMinijuego2/MiniaturaMinijuego2" to="." method="_on_minijuego2_jugar_pressed"]
+[connection signal="pressed" from="PanelMinijuegos/HBoxJuegos/VBoxRitmo/MiniaturaRitmo" to="." method="_on_ritmo_jugar_pressed"]

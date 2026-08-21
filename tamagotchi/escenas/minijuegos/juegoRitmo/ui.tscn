@@ -12,6 +12,15 @@ script = ExtResource("1_07kte")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=126221681]
 
+[node name="Volver" type="Button" parent="CanvasLayer" unique_id=2400000002]
+offset_left = 500.0
+offset_top = 34.0
+offset_right = 700.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("1_yo2ku")
+theme_override_font_sizes/font_size = 22
+text = "Volver"
+
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=1142998078]
 offset_left = 28.0
 offset_top = 34.0
@@ -21,3 +30,5 @@ theme_override_fonts/normal_font = ExtResource("1_yo2ku")
 theme_override_font_sizes/normal_font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_07kte")
 text = "0 PUNTOS"
+
+[connection signal="pressed" from="CanvasLayer/Volver" to="." method="_on_volver_pressed"]

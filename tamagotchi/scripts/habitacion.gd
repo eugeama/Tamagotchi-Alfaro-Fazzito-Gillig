@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var fondo:Sprite2D=$Fondo
 @onready var botonPintura:TextureButton=$botonPintura
+@onready var labelMonedas: Label =$Label
 
 const carpetaFondos="res://assets/Sprites/Fondos"
 
@@ -37,3 +38,6 @@ func _on_boton_pintura_pressed() -> void:
 		return
 	indiceFondo=(indiceFondo+ 1)%fondos.size()
 	fondo.texture=fondos[indiceFondo]
+
+func _process(_delta: float) -> void:
+	labelMonedas.text =str(EstadoMascota.monedas)
