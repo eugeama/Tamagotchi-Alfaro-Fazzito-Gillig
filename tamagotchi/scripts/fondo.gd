@@ -53,7 +53,7 @@ func _on_carta_volteo_completado() -> void:
 			intentos.bajar()
 			if intentos.intentoss() <= 0:
 				await get_tree().create_timer(1.0).timeout
-				get_tree().change_scene_to_file("res://escenas/habitacion.tscn")
+				terminarJuego()
 			for c in cartas_abiertas:
 				c.devolver()
 				
@@ -61,6 +61,13 @@ func _on_carta_volteo_completado() -> void:
 
 func _on_puntaje_ganador() -> void:
 	await get_tree().create_timer(1.0).timeout
+	terminarJuego()
+
+func terminarJuego() -> void:
+	if EstadoMascota.mascotaJugando!="":
+		EstadoMascota.cambioAburrimiento(EstadoMascota.mascotaJugando,-100)
+		EstadoMascota.mascotaJugando=""
+	EstadoMascota.guardarEstado()
 	get_tree().change_scene_to_file("res://escenas/habitacion.tscn")
 
 func _input(event):

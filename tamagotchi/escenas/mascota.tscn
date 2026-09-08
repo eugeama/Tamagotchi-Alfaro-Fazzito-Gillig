@@ -12,6 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://dwke8vpe1goq3" path="res://assets/Sprites/HangerButton/hangerButtonPressed.png" id="6_c40mo"]
 [ext_resource type="Texture2D" uid="uid://cls0ccpqbgxd" path="res://assets/Sprites/Minijuegos/minijuego2/miniaturaMinijuego2.png" id="12_miniMj2"]
 [ext_resource type="Texture2D" uid="uid://b05mcr2xhivqd" path="res://escenas/minijuegos/juegoRitmo/fondoRitmo.png" id="13_fondoRitmo"]
+[ext_resource type="Texture2D" uid="uid://dv2r7lwnp5hft" path="res://assets/Sprites/expresiones/comida.png" id="14_comida"]
+[ext_resource type="Texture2D" uid="uid://4jkau4d8m560" path="res://assets/Sprites/expresiones/sueño.png" id="15_sueno"]
+[ext_resource type="Texture2D" uid="uid://dp70n4op3jf04" path="res://assets/Sprites/expresiones/aburrimiento.png" id="16_aburrimiento"]
+[ext_resource type="Texture2D" uid="uid://b7jcupahtmlcs" path="res://assets/Sprites/Minijuegos/screenshotpath.PNG" id="17_screenshotpath"]
+[ext_resource type="Texture2D" uid="uid://cncsxq585240a" path="res://assets/Sprites/Minijuegos/screenshotmemotesy.PNG" id="18_screenshotmemotest"]
 
 [sub_resource type="Animation" id="Animation_lltle"]
 resource_name = "Dormir"
@@ -372,6 +377,26 @@ texture_filter = 1
 position = Vector2(0, -28)
 scale = Vector2(1.5, 1.5)
 
+[node name="Expresiones" type="Node2D" parent="textura" unique_id=305610224]
+position = Vector2(36, -45)
+
+[node name="Comida" type="Sprite2D" parent="textura/Expresiones" unique_id=362148043]
+visible = false
+texture_filter = 1
+texture = ExtResource("14_comida")
+
+[node name="Sueno" type="Sprite2D" parent="textura/Expresiones" unique_id=1706941715]
+visible = false
+texture_filter = 1
+position = Vector2(0, -14)
+texture = ExtResource("15_sueno")
+
+[node name="Aburrimiento" type="Sprite2D" parent="textura/Expresiones" unique_id=427750384]
+visible = false
+texture_filter = 1
+position = Vector2(0, -28)
+texture = ExtResource("16_aburrimiento")
+
 [node name="Label" type="Label" parent="textura" unique_id=215405688]
 texture_filter = 1
 layout_mode = 0
@@ -576,36 +601,14 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -47.0
-offset_top = 81.0
-offset_right = 74.0
-offset_bottom = 115.0
+offset_left = -53.0
+offset_top = 83.0
+offset_right = 55.0
+offset_bottom = 117.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 2
 alignment = 1
-
-[node name="VBoxMinijuego2" type="VBoxContainer" parent="PanelMinijuegos/HBoxJuegos" unique_id=-2094967292]
-texture_filter = 1
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="NombreMinijuego2" type="Label" parent="PanelMinijuegos/HBoxJuegos/VBoxMinijuego2" unique_id=-2094967290]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_vgy2f")
-theme_override_font_sizes/font_size = 2
-text = "Piedra Papel Tijera"
-horizontal_alignment = 1
-
-[node name="MiniaturaMinijuego2" type="TextureButton" parent="PanelMinijuegos/HBoxJuegos/VBoxMinijuego2" unique_id=-2094967291]
-texture_filter = 1
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-size_flags_horizontal = 4
-texture_normal = ExtResource("12_miniMj2")
-ignore_texture_size = true
-stretch_mode = 5
 
 [node name="VBoxRitmo" type="VBoxContainer" parent="PanelMinijuegos/HBoxJuegos" unique_id=-2094967288]
 layout_mode = 2
@@ -614,12 +617,15 @@ theme_override_constants/separation = 0
 alignment = 1
 
 [node name="NombreRitmo" type="Label" parent="PanelMinijuegos/HBoxJuegos/VBoxRitmo" unique_id=-2094967286]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_vgy2f")
-theme_override_font_sizes/font_size = 2
+theme_override_font_sizes/font_size = 1
 text = "Juego de Ritmo"
 horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="MiniaturaRitmo" type="TextureButton" parent="PanelMinijuegos/HBoxJuegos/VBoxRitmo" unique_id=-2094967287]
 texture_filter = 1
@@ -631,9 +637,86 @@ texture_normal = ExtResource("13_fondoRitmo")
 ignore_texture_size = true
 stretch_mode = 5
 
+[node name="VBoxJuegoPath" type="VBoxContainer" parent="PanelMinijuegos/HBoxJuegos" unique_id=904762202]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="NombreJuegoPath" type="Label" parent="PanelMinijuegos/HBoxJuegos/VBoxJuegoPath" unique_id=1243586040]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+theme_override_font_sizes/font_size = 1
+text = "Escape de Vi"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="MiniaturaJuegoPath" type="TextureButton" parent="PanelMinijuegos/HBoxJuegos/VBoxJuegoPath" unique_id=1331985271]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("17_screenshotpath")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="VBoxMemotest" type="VBoxContainer" parent="PanelMinijuegos/HBoxJuegos" unique_id=1268718515]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="NombreMemotest" type="Label" parent="PanelMinijuegos/HBoxJuegos/VBoxMemotest" unique_id=748177463]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+theme_override_font_sizes/font_size = 1
+text = "Memotest"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="MiniaturaMemotest" type="TextureButton" parent="PanelMinijuegos/HBoxJuegos/VBoxMemotest" unique_id=1511508451]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("18_screenshotmemotest")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="VBoxMinijuego2" type="VBoxContainer" parent="PanelMinijuegos/HBoxJuegos" unique_id=-2094967292]
+texture_filter = 1
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="NombreMinijuego2" type="Label" parent="PanelMinijuegos/HBoxJuegos/VBoxMinijuego2" unique_id=-2094967290]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vgy2f")
+theme_override_font_sizes/font_size = 1
+text = "Piedra Papel Tijera"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="MiniaturaMinijuego2" type="TextureButton" parent="PanelMinijuegos/HBoxJuegos/VBoxMinijuego2" unique_id=-2094967291]
+texture_filter = 1
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("12_miniMj2")
+ignore_texture_size = true
+stretch_mode = 5
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Control/guardarropa" to="." method="_on_guardarropa_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/jugar" to="." method="_on_jugar_pressed"]
-[connection signal="pressed" from="PanelMinijuegos/HBoxJuegos/VBoxMinijuego2/MiniaturaMinijuego2" to="." method="_on_minijuego2_jugar_pressed"]
 [connection signal="pressed" from="PanelMinijuegos/HBoxJuegos/VBoxRitmo/MiniaturaRitmo" to="." method="_on_ritmo_jugar_pressed"]
+[connection signal="pressed" from="PanelMinijuegos/HBoxJuegos/VBoxJuegoPath/MiniaturaJuegoPath" to="." method="_on_juego_path_pressed"]
+[connection signal="pressed" from="PanelMinijuegos/HBoxJuegos/VBoxMemotest/MiniaturaMemotest" to="." method="_on_memotest_jugar_pressed"]
+[connection signal="pressed" from="PanelMinijuegos/HBoxJuegos/VBoxMinijuego2/MiniaturaMinijuego2" to="." method="_on_minijuego2_jugar_pressed"]

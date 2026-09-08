@@ -12,5 +12,8 @@ func _process(delta: float) -> void:
 func _on_volver_pressed() -> void:
 	var monedas_ganadas= max(0, puntaje /10)
 	EstadoMascota.monedas +=monedas_ganadas
+	if EstadoMascota.mascotaJugando!="":
+		EstadoMascota.cambioAburrimiento(EstadoMascota.mascotaJugando,-100)
+		EstadoMascota.mascotaJugando=""
 	EstadoMascota.guardarEstado()
 	get_tree().change_scene_to_file("res://escenas/habitacion.tscn")

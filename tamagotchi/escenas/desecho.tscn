@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/desecho.gd" id="1_desecho"]
+[ext_resource type="Texture2D" path="res://assets/Sprites/desecho.png" id="2_desecho"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_desecho"]
+size = Vector2(80, 80)
+
+[node name="Desecho" type="Area2D"]
+input_pickable = true
+z_index = 10
+script = ExtResource("1_desecho")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_desecho")
+scale = Vector2(5, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_desecho")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

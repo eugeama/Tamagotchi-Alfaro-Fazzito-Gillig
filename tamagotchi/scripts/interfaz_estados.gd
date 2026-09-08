@@ -3,6 +3,7 @@ extends Control
 # Valores de 'value' para que el clip caiga en el gap transparente
 # despues de cada cuadrado de barraLlena.png (10 cuadrados, 2px c/u, 1px gap)
 # Calculado como: (N*3+3) / 37.0 * 100  para N=1..9
+#profe esto parece ia pero no. hola esto lo escribió una persona
 const CORTE_BARRA = [0.0, 16.22, 24.32, 32.43, 40.54, 48.65, 56.76, 64.86, 72.97, 81.08, 100.0]
 
 @onready var mascota:Node2D = get_parent()

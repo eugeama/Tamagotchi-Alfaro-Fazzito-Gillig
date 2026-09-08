@@ -110,9 +110,11 @@ func _on_timermonedas_timeout() -> void:
 	
 	var tween = create_tween()
 	tween.tween_method(
-		func(valor_intermedio: int): labelMonedas.text = "Monedas: %d" % valor_intermedio,valor_actual,valor_final,duracion
-	)
+		func(valor_intermedio: int): labelMonedas.text = "Monedas: %d" % valor_intermedio,valor_actual,valor_final,duracion)
 
 func _on_volver_pressed() -> void:
+	if EstadoMascota.mascotaJugando!="":
+		EstadoMascota.cambioAburrimiento(EstadoMascota.mascotaJugando,-100)
+		EstadoMascota.mascotaJugando=""
 	EstadoMascota.guardarEstado()
 	get_tree().change_scene_to_file("res://escenas/habitacion.tscn")

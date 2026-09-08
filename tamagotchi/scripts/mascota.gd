@@ -1,10 +1,11 @@
 extends Node2D
 @export var idMascota=""
-@export_enum("jade", "ragatha", "vi") var tipoBichito="jade"
+@export_enum("jade", "ragatha") var tipoBichito="jade"
 @export var spriteBaseMiraDerecha=false
 @export var alturaMascotaJuegos :float= 50.0
 @export var alturaStatsJuegos: float =80.0
 @export var alturaPanelJuegos :float= 25.0
+@export var offsetDesecho:=Vector2(0,55)
 
 @onready var animacion: AnimationPlayer = $AnimationPlayer
 @onready var timer: Timer = $Timer
@@ -15,6 +16,9 @@ extends Node2D
 @onready var panelMinijuegos: Control = $PanelMinijuegos
 @onready var contenedorCosmeticos: HBoxContainer = $PanelCosmeticos/ScrollContainer/ContenedorCosmeticos
 @onready var cosmeticoEquipado: Sprite2D = $textura/CosmeticoEquipado
+@onready var burbujaComida: Sprite2D = $textura/Expresiones/Comida
+@onready var burbujaSueno: Sprite2D = $textura/Expresiones/Sueno
+@onready var burbujaAburrimiento: Sprite2D = $textura/Expresiones/Aburrimiento
 
 const perdidaEnergiaPeriodica=5.0
 const sumaHambrePeriodica=10.0
@@ -29,25 +33,27 @@ const velocidadIdleMin=45.0
 const velocidadIdleMax=95.0
 const margenMovimiento=30.0
 const carpetaBichitosBase="res://assets/bichitos"
+const umbralHambreAlta=70.0
+const umbralAburrimientoAlto=70.0
+const umbralEnergiaBaja=30.0
+const pausaDesechoMin=18.0
+const pausaDesechoMax=35.0
+const escenaDesecho=preload("res://escenas/desecho.tscn")
 
 const archivosPorBichito={
 	"jade": {
 		"idle": "normalJ.png",
 		"caminar": "caminando.png",
 		"comer": "comiendo.png",
-		"dormir": "durmiendo.png"
+		"dormir": "durmiendo.png",
+		"enojado": "enojado1.png"
 	},
 	"ragatha": {
 		"idle": "normalR 1.png",
 		"caminar": "caminandoR.png",
 		"comer": "comiendoR.png",
-		"dormir": "durmiendoR.png"
-	},
-	"vi": {
-		"idle": "normalV.png",
-		"caminar": "caminandoV.png",
-		"comer": "comiendoV.png",
-		"dormir": "durmiendoV.png"
+		"dormir": "durmiendoR.png",
+		"enojado": "enojadoR1.png"
 	}
 }
 
@@ -72,6 +78,7 @@ func _ready() -> void:
 		EstadoMascota.cambioEstado.connect(actualizarAnimacion)
 	random.randomize()
 	inicializarVisualBichito()
+	actualizarExpresiones()
 	offsetCamaraMascota=camara.position
 	atributos.visible=false
 	atributos.modulate=Color(1,1,1,0)
@@ -80,6 +87,7 @@ func _ready() -> void:
 	poblarCosmeticos()
 	actualizarEquipado()
 	iniciarMovimientoIdle()
+	iniciarDesechos()
 	
 func _on_timer_timeout() -> void:
 	EstadoMascota.cambioEnergia(idEstado,-perdidaEnergiaPeriodica)
@@ -268,7 +276,26 @@ func iniciarMovimientoIdle() -> void:
 		tweenMovimiento.tween_property(self,"global_position",destino,duracion)
 		await get_tree().create_timer(duracion).timeout
 		if not mostrandoAtributos:
-			aplicarSpriteEstado("idle")
+			actualizarAnimacion(idEstado)
+
+func iniciarDesechos() -> void:
+	while is_inside_tree():
+		await get_tree().create_timer(random.randf_range(pausaDesechoMin,pausaDesechoMax)).timeout
+		if is_inside_tree():
+			crearDesecho()
+
+func crearDesecho() -> void:
+	if get_parent()==null:
+		return
+	var desecho=escenaDesecho.instantiate()
+	var separacionAlAzar=random.randf_range(-28.0,28.0)
+	desecho.global_position=global_position+offsetDesecho+Vector2(separacionAlAzar,0)
+	desecho.recogido.connect(_on_desecho_recogido)
+	get_parent().add_child(desecho)
+	
+func _on_desecho_recogido() -> void:
+	EstadoMascota.monedas+=1
+	EstadoMascota.guardarEstado()
 			
 func actualizarOrientacionSegunDireccion(deltaX: float) -> void:
 	if abs(deltaX)<0.001:
@@ -304,15 +331,29 @@ func ignorarMouseEnVisuales(nodo: Node) -> void:
 func actualizarAnimacion(idMascotaCambiada: String="") -> void:
 	if idMascotaCambiada!="" and idMascotaCambiada!=idEstado:
 		return
+	actualizarExpresiones()
 	if mostrandoAtributos:
 		return
 	var hambre=EstadoMascota.hambre(idEstado)
 	var energia=EstadoMascota.energia(idEstado)
 	var aburrimiento=EstadoMascota.aburrimiento(idEstado)
-	if hambre>=70 or energia<=30 or aburrimiento>=70:
-		aplicarSpriteEstado("caminar")
+	var estaEnojado=false
+	if hambre>umbralHambreAlta:
+		estaEnojado=true
+	if energia<umbralEnergiaBaja:
+		estaEnojado=true
+	if aburrimiento>umbralAburrimientoAlto:
+		estaEnojado=true
+	if estaEnojado:
+		aplicarSpriteEstado("enojado")
 	else:
 		aplicarSpriteEstado("idle")
+
+func actualizarExpresiones() -> void:
+	burbujaComida.visible=EstadoMascota.hambre(idEstado)>umbralHambreAlta
+	burbujaSueno.visible=EstadoMascota.energia(idEstado)<umbralEnergiaBaja
+	burbujaAburrimiento.visible=EstadoMascota.aburrimiento(idEstado)>umbralAburrimientoAlto
+
 func cambiarAnimacion(nombre:String)-> void:
 	if animacion.current_animation!=nombre:
 		animacion.play(nombre)
@@ -329,7 +370,7 @@ func comer() -> void:
 	animacion.play("comer")
 func jugar() -> void:
 	#aca va el juegou
-	EstadoMascota.cambioAburrimiento(idEstado,-20)
+	EstadoMascota.cambioAburrimiento(idEstado,-30)
 	EstadoMascota.cambioEnergia(idEstado,-10)
 	actualizarAnimacion(idEstado)
 	
@@ -338,7 +379,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name=="quitarAtributos":
 		atributos.visible=false
 	if anim_name!="idle":
-		aplicarSpriteEstado("idle")
+		actualizarAnimacion(idEstado)
 		animacion.play("idle")
 		
 		
@@ -370,14 +411,28 @@ func _tweenBajarJuegos() -> void:
 	t.tween_property(panelMinijuegos, "position", Vector2(0, 0), 0.5)
 	
 func _on_minijuego2_jugar_pressed() -> void:
+	EstadoMascota.mascotaJugando=idEstado
 	_cerrarJuegos()
 	cerrarAtributos()
 	get_tree().change_scene_to_packed(load("res://escenas/Minijuego2.tscn"))
 	
 func _on_ritmo_jugar_pressed() -> void:
+	EstadoMascota.mascotaJugando=idEstado
 	_cerrarJuegos()
 	cerrarAtributos()
 	get_tree().change_scene_to_packed(load("res://escenas/minijuegos/juegoRitmo/nivel.tscn"))
+
+func _on_juego_path_pressed() -> void:
+	EstadoMascota.mascotaJugando=idEstado
+	_cerrarJuegos()
+	cerrarAtributos()
+	get_tree().change_scene_to_packed(load("res://escenas/JuegoPath.tscn"))
+	
+func _on_memotest_jugar_pressed() -> void:
+	EstadoMascota.mascotaJugando=idEstado
+	_cerrarJuegos()
+	cerrarAtributos()
+	get_tree().change_scene_to_packed(load("res://escenas/fondo.tscn"))
 	
 func _on_guardarropa_pressed() -> void:
 	mostrarCaja()

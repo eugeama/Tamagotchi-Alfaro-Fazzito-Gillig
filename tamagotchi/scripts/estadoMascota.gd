@@ -4,6 +4,7 @@ signal cambioEstado(idMascota)
 var estados={}
 var juegoIniciado=false
 var mascotaConFoco=""
+var mascotaJugando=""
 var monedas: int =0
 var cosmeticsDesbloqueados: Array= []
 var cosmeticoPuesto: Dictionary ={}
